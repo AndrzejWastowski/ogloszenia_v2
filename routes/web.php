@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\SocialiteLoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/start', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
+
+Route::get('login/facebook', [SocialiteLoginController::class, 'redirectToFacebook']);
+Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
+
+Auth::routes();
