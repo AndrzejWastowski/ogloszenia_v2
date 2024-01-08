@@ -19,15 +19,13 @@ Route::get('/', function () {
 });
 
 
-Route::get('/start', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/start', [App\Http\Controllers\HomeController::class, 'index'])->name('pages.start');
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
 
 Route::get('login/facebook', [SocialiteLoginController::class, 'redirectToFacebook']);
 Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
-
-Auth::routes();
 
 Auth::routes();
 
