@@ -3,6 +3,9 @@
 	@section('content')
 	<div class="page-content">
 
+		<h1>{{ __('Login') }}</h1>
+<p>{{ __('Welcome') }}</p>
+
 		<div class="dash-wrapper dash-header">
 			<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 row-cols-xxl-5">
 				<div class="col border-end border-light-2">
