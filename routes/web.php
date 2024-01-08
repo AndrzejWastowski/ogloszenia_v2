@@ -15,7 +15,7 @@ use App\Http\Controllers\Auth\SocialiteLoginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('start');
 });
 
 
@@ -28,3 +28,7 @@ Route::get('login/facebook', [SocialiteLoginController::class, 'redirectToFacebo
 Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
 
 Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

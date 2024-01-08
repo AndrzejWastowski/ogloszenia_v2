@@ -1,0 +1,19 @@
+/* resources/css/app.css */
+
+@import '../plugins/simplebar/css/simplebar.css';
+@import '../plugins/perfect-scrollbar/css/perfect-scrollbar.css';
+@import '../plugins/highcharts/css/highcharts.css';
+@import '../plugins/vectormap/jquery-jvectormap-2.0.2.css';
+/* loader */
+@import 'pace.min.css';
+@import 'bootstrap.min.css';
+@import 'bootstrap-extended.css';
+@import 'style.css';
+@import 'icons.css';
+
+/* Theme Style CSS */
+@import 'dark-theme.css';
+@import 'semi-dark.css';
+@import 'header-colors.css';
+
+
