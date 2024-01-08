@@ -1,12 +1,12 @@
 <header>
     <div class="topbar d-flex align-items-center">
         <nav class="navbar navbar-expand gap-3">
-            <div class="topbar-logo-header">
-                <div class="">
-                    <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+            <div class="top-menu-left d-none d-lg-block">
+                <div class="d-inline">
+                    <img src="assets/images/logo-icon.png" class="logo-icon inline" alt="logo icon">
                 </div>
-                <div class="">
-                    <h4 class="logo-text">Targowisko XYZ</h4>
+                <div class="d-inline logo-text">
+                   Targowisko XYZ
                 </div>
             </div>
 
