@@ -704,7 +704,7 @@ File: icons.css
 
 	transform: rotate(90deg);
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=1)';
+
 
 }
 
@@ -712,7 +712,7 @@ File: icons.css
 
 	transform: rotate(180deg);
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2)';
+
 
 }
 
@@ -720,7 +720,6 @@ File: icons.css
 
 	transform: rotate(270deg);
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=3)';
 
 }
 
@@ -728,7 +727,6 @@ File: icons.css
 
 	transform: scaleX(-1);
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)';
 
 }
 
@@ -736,7 +734,7 @@ File: icons.css
 
 	transform: scaleY(-1);
 
-	-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)';
+
 
 }
 
