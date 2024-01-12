@@ -1,8 +1,7 @@
 $(function () {
+
 	"use strict";
-	/* perfect scrol bar */
-	new PerfectScrollbar('.header-message-list');
-	new PerfectScrollbar('.header-notifications-list');
+
 	// search bar
 	$(".mobile-search-icon").on("click", function () {
 		$(".search-bar").addClass("full-search-bar");
@@ -40,6 +39,12 @@ $(function () {
 				scrollTop: 0
 			}, 600);
 			return false;
+		});
+		$('.header_slider').slick({
+			// opcje konfiguracji
+			slidesToShow: 3,
+			dots:true,
+			centerMode: true
 		});
 	});
 	
@@ -134,7 +139,6 @@ $(function () {
 	});
 	
 	
-	
    // sidebar colors 
 
 
@@ -147,6 +151,8 @@ $(function () {
     $('#sidebarcolor7').click(theme7);
     $('#sidebarcolor8').click(theme8);
 
+
+	
     function theme1() {
       $('html').attr('class', 'color-sidebar sidebarcolor1');
     }
@@ -178,25 +184,5 @@ $(function () {
     function theme8() {
       $('html').attr('class', 'color-sidebar sidebarcolor8');
     }
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 });

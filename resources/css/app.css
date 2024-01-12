@@ -1,7 +1,8 @@
 /* resources/css/app.css */
 
 @import '../plugins/simplebar/css/simplebar.css';
-@import '../plugins/perfect-scrollbar/css/perfect-scrollbar.css';
+
+
 @import '../plugins/highcharts/css/highcharts.css';
 @import '../plugins/vectormap/jquery-jvectormap-2.0.2.css';
 /* loader */
@@ -15,5 +16,9 @@
 @import 'dark-theme.css';
 @import 'semi-dark.css';
 @import 'header-colors.css';
+@import '../plugins/slick/slick.css';
+@import '../plugins/slick/slick-theme.css';
+
+
 
 
