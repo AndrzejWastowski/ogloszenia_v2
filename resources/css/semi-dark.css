@@ -111,7 +111,7 @@ html.semi-dark .primary-menu .show>.nav-link {
 html.semi-dark .dropdown-item.active, html.semi-dark .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #8833ff;
+    background-color: #0549c7;
 }
 html.semi-dark .primary-menu .navbar .navbar-nav a.nav-link {
 	border-bottom: 1px solid rgb(255 255 255 / 10%);

@@ -597,12 +597,23 @@ ul.scroll-menu {
 .dash-wrapper {
 
     margin: -1.5rem -1.5rem -5.5rem -1.5rem;
-	
     padding: 1.5rem 1.5rem 6.5rem 1.5rem;
-
 	border-bottom-left-radius: 10px;
-
     border-bottom-right-radius: 10px;
+
+}
+
+
+.section-start-header {
+    background-color: #0549c7;
+	margin: 3rem;
+}
+
+.section-wrapper {
+
+    margin: -1.5rem -1.5rem -5.5rem -1.5rem;
+    padding: 1.5rem 1.5rem 6.5rem 1.5rem;
+	border-radius: 10px;
 
 }
 
@@ -647,7 +658,7 @@ ul.scroll-menu {
 	right: 12px;
 
 
-	background-color: #8833ff;
+	background-color: #0549c7;
 
 
 	z-index: 5;
@@ -3322,7 +3333,7 @@ ul.scroll-menu {
 .bg-light-primary {
 
 
-	background-color: rgb(136 51 255 / 15%) !important;
+	background-color: rgba(51, 82, 255, 0.15) !important;
 
 
 }

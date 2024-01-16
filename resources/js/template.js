@@ -11,7 +11,7 @@ $(function () {
 		$(".search-bar").removeClass("full-search-bar");
 		$(".page-wrapper").removeClass("search-overlay");
 	});
-	
+
 	// dark mode
 	$(".dark-mode").on("click", function() {
 
@@ -42,29 +42,34 @@ $(function () {
 		});
 		$('.header_slider').slick({
 			// opcje konfiguracji
-			slidesToShow: 3,
+			slidesToShow: 4,
+			slidesToScroll: 1,
 			dots:true,
-			centerMode: true
+			centerMode: true,
+			responsive: [
+				{
+					   breakpoint: 900, // Szerokość ekranu 768px i mniej
+					   settings: {
+						   slidesToShow: 1, // Pokaż 1 slajd na małych ekranach
+						   slidesToScroll: 1 // Przewijaj po 1 slajdzie
+					   }
+				   },]
 		});
 	});
-	
-	
 	$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
 		if (!$(this).next().hasClass('show')) {
 		  $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
 		}
 		var $subMenu = $(this).next(".dropdown-menu");
+
 		$subMenu.toggleClass('show');
-	  
-	  
+
 		$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
 		  $('.submenu .show').removeClass("show");
 		});
-	  
-	  
 		return false;
 	  });
-	
+
 	// chat toggle
 	$(".chat-toggle-btn").on("click", function () {
 		$(".chat-wrapper").toggleClass("chat-toggled");

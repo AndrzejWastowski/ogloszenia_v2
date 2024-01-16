@@ -7,7 +7,7 @@
                             alt="logo Targowisko"></a>
                 </div>
                 <div class="d-inline logo-text">
-                    <a href="{{ route('page.start') }}">Targowisko</a>
+                    <a href="{{ route('page.start') }}"><strong>Targowisko</strong></a>
                 </div>
             </div>
 

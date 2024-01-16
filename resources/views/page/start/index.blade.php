@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="page-content">
 
+    <div class="page-content">
         <div class="dash-wrapper dash-header">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 row-cols-xxl-5">
                 <div class="col border-end border-light-2">
@@ -96,7 +96,17 @@
                 </div>
             </div>
         </div><!--end row-->
-        @include('page.start.header_slider')
+
+        <div class="section-wrapper section-start-header">
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <h3 class="mb-3 text-white t">OGŁOSZENIA DROBNE</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @include('page.start.header_slider')
+        </div>
 
         <div class="row">
             <div class="col-12 col-lg-8 d-flex">
