@@ -13,8 +13,7 @@
 @import 'icons.css';
 
 /* Theme Style CSS */
-@import 'dark-theme.css';
-@import 'semi-dark.css';
+
 @import 'header-colors.css';
 @import '../plugins/slick/slick.css';
 @import '../plugins/slick/slick-theme.css';

@@ -96,74 +96,8 @@
                 </div>
             </div>
         </div><!--end row-->
-<div class="row">
-	<div class="header_slider">
-					
-		<div class="card radius-10">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0">New Sessions</p>
-						<h5 class="mb-0">54.6%</h5>
-					</div>
-					<div class="widgets-icons bg-light-primary text-primary ms-auto"><i
-							class="bx bxs-cookie"></i></div>
-				</div>
-				<div id="chart8"></div>
-			</div>
-		</div><div class="card radius-10">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0">New Sessions</p>
-						<h5 class="mb-0">54.6%</h5>
-					</div>
-					<div class="widgets-icons bg-light-primary text-primary ms-auto"><i
-							class="bx bxs-cookie"></i></div>
-				</div>
-				<div id="chart8"></div>
-			</div>
-		</div><div class="card radius-10">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0">New Sessions</p>
-						<h5 class="mb-0">54.6%</h5>
-					</div>
-					<div class="widgets-icons bg-light-primary text-primary ms-auto"><i
-							class="bx bxs-cookie"></i></div>
-				</div>
-				<div id="chart8"></div>
-			</div>
-		</div><div class="card radius-10">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0">New Sessions</p>
-						<h5 class="mb-0">54.6%</h5>
-					</div>
-					<div class="widgets-icons bg-light-primary text-primary ms-auto"><i
-							class="bx bxs-cookie"></i></div>
-				</div>
-				<div id="chart8"></div>
-			</div>
-		</div><div class="card radius-10">
-			<div class="card-body">
-				<div class="d-flex align-items-center">
-					<div>
-						<p class="mb-0">New Sessions</p>
-						<h5 class="mb-0">54.6%</h5>
-					</div>
-					<div class="widgets-icons bg-light-primary text-primary ms-auto"><i
-							class="bx bxs-cookie"></i></div>
-				</div>
-				<div id="chart8"></div>
-			</div>
-		</div>
+        @include('page.start.header_slider')
 
-		<!-- więcej elementów -->
-	</div>
-</div>
         <div class="row">
             <div class="col-12 col-lg-8 d-flex">
                 <div class="card radius-10 w-100">

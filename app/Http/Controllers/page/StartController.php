@@ -24,6 +24,6 @@ class StartController extends Controller
      */
     public function index()
     {
-        return view('start');
+        return view('page.start.index');
     }
 }

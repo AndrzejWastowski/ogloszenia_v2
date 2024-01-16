@@ -15,12 +15,9 @@ use App\Http\Controllers\page\StartController;
 |
 */
 
-Route::get('/', function () {
-    return view('start');
-});
 
 
-Route::get('/start', [StartController::class, 'index'])->name('pages.start');
+Route::get('/', [StartController::class, 'index'])->name('page.start');
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
