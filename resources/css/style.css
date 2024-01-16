@@ -121,7 +121,7 @@ a {
 	letter-spacing: 1px;
 
 
-	color: #8833ff;
+	color: #0549c7;
 
 
 }
@@ -136,7 +136,7 @@ a {
 	cursor: pointer;
 
 
-	color: #8833ff;
+	color: #0549c7;
 
 
 }
@@ -4127,6 +4127,13 @@ input::placeholder {
 }
 
 
+.ikon-header-show {
+
+	font-size: 18px;
+	left: 15px;
+
+}
+
 
 .search-show {
 
@@ -4301,7 +4308,7 @@ input::placeholder {
 }
 
 
-.user-box {
+.menu-box {
 
 
 	display: flex;
@@ -4725,7 +4732,7 @@ input::placeholder {
 }
 
 
-.user-box .dropdown-menu i {
+.menu-box .dropdown-menu i {
 
 
 	vertical-align: middle;
@@ -5606,7 +5613,7 @@ input::placeholder {
 @media screen and (max-width: 767px) {
 
 
-	.user-box .user-info {
+	.menu-box .user-info {
 
 
 		display: none;
