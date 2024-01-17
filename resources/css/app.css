@@ -2,11 +2,8 @@
 
 @import '../plugins/simplebar/css/simplebar.css';
 
-
-@import '../plugins/highcharts/css/highcharts.css';
-@import '../plugins/vectormap/jquery-jvectormap-2.0.2.css';
 /* loader */
-@import 'pace.min.css';
+
 @import 'bootstrap.min.css';
 @import 'bootstrap-extended.css';
 @import 'style.css';
@@ -14,7 +11,7 @@
 
 /* Theme Style CSS */
 
-@import 'header-colors.css';
+
 @import '../plugins/slick/slick.css';
 @import '../plugins/slick/slick-theme.css';
 

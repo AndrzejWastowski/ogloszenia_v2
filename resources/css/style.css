@@ -604,17 +604,15 @@ ul.scroll-menu {
 }
 
 
-.section-start-header {
+.section-ads_small {
     background-color: #0549c7;
-	margin: 3rem;
 }
 
 .section-wrapper {
-
-    margin: -1.5rem -1.5rem -5.5rem -1.5rem;
-    padding: 1.5rem 1.5rem 6.5rem 1.5rem;
-	border-radius: 10px;
-
+   margin: 1.5rem 1.5rem 1.5rem 1.5rem;
+   padding: 1rem;
+   text-align: center;
+ 	border-radius: 10px;
 }
 
 
