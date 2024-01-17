@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\SocialiteLoginController;
 use App\Http\Controllers\page\StartController;
+use App\Http\Controllers\page\SmallAdsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,9 @@ use App\Http\Controllers\page\StartController;
 
 
 Route::get('/', [StartController::class, 'index'])->name('page.start');
+Route::get('/drobne', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
+Route::get('/drobne/{SmallAds}', [SmallAdsController::class, 'lists'])->name('page.small_ads.show');
+
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
