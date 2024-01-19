@@ -3,7 +3,7 @@
         <nav class="navbar navbar-expand gap-3">
             <div class="top-menu-left d-none d-lg-block">
                 <div class="d-inline">
-                    <a href="{{ route('page.start') }}"><img src="assets/images/logo-icon.png" class="logo-icon inline"
+                    <a href="{{ route('page.start') }}"><img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon inline"
                             alt="logo Targowisko"></a>
                 </div>
                 <div class="d-inline logo-text">

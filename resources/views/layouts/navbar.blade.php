@@ -21,11 +21,11 @@
                                 <i class='bx bx-chevron-down'></i></div>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="index.html"><i class='bx bx-pie-chart-alt'></i>Drobne</a></li>
-                            <li><a class="dropdown-item" href="index2.html"><i class='bx bx-shield-alt-2'></i>Elektronika</a></li>
-                            <li><a class="dropdown-item" href="index3.html"><i class='bx bx-cart'></i>Dom i Ogród</a></li>
-                            <li><a class="dropdown-item" href="index4.html"><i class='bx bx-window-alt'></i>Moda </a></li>
-                            <li><a class="dropdown-item" href="index5.html"><i class='bx bx-briefcase'></i>Sport</a></li>
+                            <li><a class="dropdown-item" href="{{ route('page.small_ads.lists') }}"><i class='bx bx-pie-chart-alt'></i>Drobne</a></li>
+                            <li><a class="dropdown-item" href="{{ route('page.small_ads.category',['elektronika']) }}"><i class='bx bx-shield-alt-2'></i>Elektronika</a></li>
+                            <li><a class="dropdown-item" href="{{ route('page.small_ads.category',['dom_ogrod']) }}"><i class='bx bx-cart'></i>Dom i Ogród</a></li>
+                            <li><a class="dropdown-item" href="{{ route('page.small_ads.category',['moda']) }}"><i class='bx bx-window-alt'></i>Moda </a></li>
+                            <li><a class="dropdown-item" href="{{ route('page.small_ads.category',['sport']) }}"><i class='bx bx-briefcase'></i>Sport</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

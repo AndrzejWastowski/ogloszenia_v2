@@ -34,6 +34,7 @@
 	<!--end wrapper-->
 	<!-- Bootstrap JS -->
     @vite(['resources/js/app.js'])
+	
 </body>
 @yield('script')
 </html>

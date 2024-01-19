@@ -20,8 +20,10 @@ use App\Http\Controllers\page\SmallAdsController;
 
 
 Route::get('/', [StartController::class, 'index'])->name('page.start');
-Route::get('/drobne', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
-Route::get('/drobne/{SmallAds}', [SmallAdsController::class, 'lists'])->name('page.small_ads.show');
+Route::get('/drobne/all', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
+Route::get('/drobne/{category}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
+Route::get('/drobne/oferta/{SmallAds}', [SmallAdsController::class, 'show'])->name('page.small_ads.show');
+
 
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
