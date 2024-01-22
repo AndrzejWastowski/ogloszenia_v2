@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SmallAdsContent extends Model
 {
@@ -40,9 +41,9 @@ class SmallAdsContent extends Model
     'port',
     'host',
     'browser',
-    'portal_id', 
+    'portal_id',
     'status',
-    'invoice', 
+    'invoice',
     ];
 
     /**
@@ -77,15 +78,12 @@ class SmallAdsContent extends Model
         public function TopPhotos()
     {
         //$result = $this->hasMany(SmallAdsPhoto::class, 'small_ads_contents_id')
-        
+
         $result = $this->hasMany(SmallAdsPhoto::class, 'small_ads_contents_id')
         ->where('sort',1)
         ->limit(1);
-        return $result;        
+        return $result;
     }
-
-
-
 
     /**
      * Display the first photo
@@ -98,7 +96,10 @@ class SmallAdsContent extends Model
         return $result;
     }
 
-    public function user()
+    /**
+     * Get the user that owns the SmallAds.
+     */
+    public function user(): BelongsTo
     {
         $result = $this->belongsTo(User::class, 'users_id');
 

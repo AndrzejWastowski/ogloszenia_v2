@@ -14,22 +14,17 @@ class SmallAdsCategorie extends Model
      * @var array
      */
     protected $fillable = ['id', 'name', 'link'];
-
     protected $table = 'small_ads_categories';
-
     public function SmallAdsSubCategories()
     {
         return $this->hasMany(SmallAdsSubCategorie::class, 'small_ads_categories_id');
     }
-    
     public function getRouteKeyName()
     {
         return 'link'; // Jeśli 'link' to Twoje pole slug
     }
-
     public function SmallAdsContent()
     {
         return $this->hasMany(SmallAdsContent::class);
     }
-
 }
