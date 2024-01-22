@@ -5695,3 +5695,26 @@ input::placeholder {
 
 
 }
+
+.sidebar_topic {
+	font-weight: bold;
+	color: #000;
+}
+
+.list-group-item  {
+	margin-top:3px;
+	font-weight: bold;
+	padding: 3px;
+	background-color: #ebebeb;
+	border-color: #e4e4e4
+}
+.submenu-bg-active {
+	font-weight: bold;
+	color: #000;
+
+}
+.list-group-item.active {
+    font-weight: bold;
+	color: #000;
+	background-color: #aaa;
+}

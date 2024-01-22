@@ -21,6 +21,15 @@ class SmallAdsCategorie extends Model
     {
         return $this->hasMany(SmallAdsSubCategorie::class, 'small_ads_categories_id');
     }
+    
+    public function getRouteKeyName()
+    {
+        return 'link'; // Jeśli 'link' to Twoje pole slug
+    }
 
+    public function SmallAdsContent()
+    {
+        return $this->hasMany(SmallAdsContent::class);
+    }
 
 }

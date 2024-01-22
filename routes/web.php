@@ -21,8 +21,9 @@ use App\Http\Controllers\page\SmallAdsController;
 
 Route::get('/', [StartController::class, 'index'])->name('page.start');
 Route::get('/drobne/all', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
-Route::get('/drobne/{category}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
-Route::get('/drobne/oferta/{SmallAds}', [SmallAdsController::class, 'show'])->name('page.small_ads.show');
+Route::get('/drobne/{SmallAdsCategorie}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
+Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsController::class, 'subCategory'])->name('page.small_ads.subCategory');
+Route::get('/drobne/oferta/{SmallAdsContent}', [SmallAdsController::class, 'show'])->name('page.small_ads.show');
 
 
 

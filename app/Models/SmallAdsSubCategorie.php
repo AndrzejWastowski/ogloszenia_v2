@@ -19,6 +19,16 @@ class SmallAdsSubCategorie extends Model
     
     protected $table = 'small_ads_sub_categories';
 
+    public function getRouteKeyName()
+    {
+        return 'link'; // Jeśli 'link' to Twoje pole slug
+    }
+
+    public function SmallAdsContent()
+    {
+        return $this->hasMany(SmallAdsContent::class);
+    }
+
     /*
     * The attributes that are mass assignable.
     *
