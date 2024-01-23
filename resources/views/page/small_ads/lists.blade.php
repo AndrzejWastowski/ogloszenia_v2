@@ -67,20 +67,15 @@
                                         <div class="thumbnail">
                                             <a class="image" href="{{ route('page.small_ads.show',['SmallAdsContent'=>$small_ads->id]) }}">
                                                 @php
-
-
-                                            $filename = $small_ads->photos->first()->name ?? 'default';
-
-                                                $path = $small_ads->imagePath.'/' . $small_ads->id . '/' . $filename . 'd.webp';
-
-                                               // public_path($path);
+                                                $filename = $small_ads->photos->first()->name ?? 'default';
+                                                $path = $small_ads->image_path.'/' . $small_ads->id . '/' . $filename . 'd.webp';
 
                                                 if(file_exists($path)) {
                                                         $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
                                                     } else {
-                                                        $defaultImage = '/resources/brak_zdjecia.webp'; // podobnie, ścieżka względna
+                                                        $defaultImage = '/resources/brak_zdjecia_350x350.webp'; // podobnie, ścieżka względna
                                                     }
-                                                    $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
+                                                   // $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
                                                 @endphp
 
                                                 <img src="{{ asset($defaultImage) }}" alt="{{ $small_ads->name }}" class="img-fluid">
@@ -88,7 +83,15 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        {{ $small_ads->name }}
+                                        @if ($small_ads->inscription === 'Promocja!') <span class="badge bg-danger p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                        @if ($small_ads->inscription === 'Wyprzedaż') <span class="badge bg-success p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                        @if ($small_ads->inscription === 'Bestseller') <span class="badge bg-primary p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                        @if ($small_ads->inscription === 'Przecena') <span class="badge bg-gradient-lush p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+
+                                        <div class="mb-0 float-end fw-bold">{{ $small_ads->date_end }}</div>
+                                        <div class="mb-0 fw-bold"><h3>{{ $small_ads->name }}</h3></div>
+                                        <div class="mb-0">{{ $small_ads->lead }}</div>
+                                        <a class="btn btn-primary" href="{{ route('page.small_ads.show',['SmallAdsContent'=>$small_ads->id]) }}">Zobacz więcej</a>
                                     </div>
                                 </div>
                             </div>
@@ -97,19 +100,48 @@
                     <div class="card radius-10 w-100 ">
                         <div class="card-body ">
                             <div class="row mb-0 font-18 sidebar_topic text-muted">
-                                OGŁOSZENIA
+                                POZOSTAŁE OGŁOSZENIA
                                   </div>
                             </div>
                     </div>
                     @foreach ($contents as $small_ads)
-                        <div class="card radius-10 w-100 {{ $small_ads->highlighted }}">
-                            <div class="card-body ">
-                                <div class="row">
-                                    {{ $small_ads->name }}
+                    <div class="card radius-10 w-100 {{ $small_ads->highlighted }}">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-2">
+                                    <div class="thumbnail">
+                                        <a class="image" href="{{ route('page.small_ads.show',['SmallAdsContent'=>$small_ads->id]) }}">
+                                            @php
+                                            $filename = $small_ads->photos->first()->name ?? 'default';
+                                            $path = $small_ads->image_path.'/' . $small_ads->id . '/' . $filename . 'd.webp';
+
+                                            if(file_exists($path)) {
+                                                    $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
+                                                } else {
+                                                    $defaultImage = '/resources/brak_zdjecia_350x350.webp'; // podobnie, ścieżka względna
+                                                }
+                                               // $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
+                                            @endphp
+
+                                            <img src="{{ asset($defaultImage) }}" alt="{{ $small_ads->name }}" class="img-fluid">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    @if ($small_ads->inscription === 'Promocja!') <span class="badge bg-danger p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                    @if ($small_ads->inscription === 'Wyprzedaż') <span class="badge bg-success p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                    @if ($small_ads->inscription === 'Bestseller') <span class="badge bg-primary p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+                                    @if ($small_ads->inscription === 'Przecena') <span class="badge bg-gradient-lush p-2">{{ $small_ads->inscription }}<span data-role="remove"></span></span> @endif
+
+                                    <div class="mb-0 float-end fw-bold">{{ $small_ads->date_end }}</div>
+                                    <div class="mb-0 fw-bold"><h3>{{ $small_ads->name }}</h3></div>
+                                    <div class="mb-0">{{ $small_ads->lead }}</div>
+                                    <button class="btn btn-primary" >Zobacz więcej</button>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+                @endforeach
                 </div>
             </div>
         </div>

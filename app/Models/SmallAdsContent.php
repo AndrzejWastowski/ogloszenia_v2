@@ -37,6 +37,7 @@ class SmallAdsContent extends Model
     'promoted',
     'highlighted',
     'inscription',
+    'image_path',
     'adress_ip',
     'port',
     'host',
@@ -60,12 +61,12 @@ class SmallAdsContent extends Model
         return 'slug'; // do SEO wyszukiwania
     }
 
-    public function SmallAdsCategories()
+    public function category()
     {
         return $this->belongsTo(SmallAdsCategorie::class, 'small_ads_categories_id');
     }
 
-    public function SmallAdsSubCategories()
+    public function subCategory()
     {
         return $this->belongsTo(SmallAdsSubCategorie::class, 'small_ads_sub_categories_id');
     }
@@ -75,7 +76,7 @@ class SmallAdsContent extends Model
         return $this->hasMany(SmallAdsPhoto::class, 'small_ads_contents_id');
     }
 
-        public function TopPhotos()
+    public function topPhoto()
     {
         //$result = $this->hasMany(SmallAdsPhoto::class, 'small_ads_contents_id')
 

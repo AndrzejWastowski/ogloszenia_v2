@@ -1914,3 +1914,11 @@ input::placeholder {
 .highlight_5 {
 	background-color: #fff7c8;
 }
+
+.bg-info {
+	background-color: #0dcaf0!important
+}
+
+.bg-gradient-lush {
+	background-color: #0dcaf0!important
+}
