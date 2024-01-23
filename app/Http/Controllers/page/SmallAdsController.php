@@ -82,11 +82,12 @@ class SmallAdsController extends Controller
         ->where('status','active')
         ->where('top','1')
         ->get();
-
+/*
         $contents_top = $contents_top->map(function ($content) {
         $content->imagePath = $this->imageService->createImagePath('drobne',$content->date_add);
         return $content;
     });
+*/
 
         $today = Carbon::now();
         $contents = SmallAdsContent::with(['user','photos'])
@@ -97,11 +98,12 @@ class SmallAdsController extends Controller
         ->where('top','0')
         ->get();
 
-        
+/*
         $contents = $contents->map(function ($content) {
-            $content->imagePath = $this->imageService->createImagePath('drobne',$content->date_add);
+            $content->imagePath = $this->imageService->getImagePath('drobne',$content->date_add);
             return $content;
         });
+    */
 
         $pageTitle = 'Ogłoszenia drobne z kategori: '.$activeCategory->name.' i podkategorii: '.$activeSubCategory->name;
         return view('page.small_ads.lists',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));

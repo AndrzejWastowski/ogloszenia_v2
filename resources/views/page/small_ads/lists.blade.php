@@ -71,16 +71,16 @@
 
                                             $filename = $small_ads->photos->first()->name ?? 'default';
 
-                                                $path = $small_ads->imagePath.'/' . $small_ads->id . '/gallery/' . $filename . 'd.webp';
+                                                $path = $small_ads->imagePath.'/' . $small_ads->id . '/' . $filename . 'd.webp';
 
-                                                public_path($path);
+                                               // public_path($path);
 
-
-                                                if(file_exists(public_path($path))) {
+                                                if(file_exists($path)) {
                                                         $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
                                                     } else {
                                                         $defaultImage = '/resources/brak_zdjecia.webp'; // podobnie, ścieżka względna
                                                     }
+                                                    $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
                                                 @endphp
 
                                                 <img src="{{ asset($defaultImage) }}" alt="{{ $small_ads->name }}" class="img-fluid">
