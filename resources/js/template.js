@@ -80,6 +80,37 @@ $(function () {
 	  $('.myCarousel').carousel({
 		interval: 2000
 	  })
+
+	  var images = $('.thumbnail').map(function() {
+        return $(this).attr('src');
+    }).get();
+
+    var currentImageIndex = -1;
+
+    $('.thumbnail').on('click', function() {
+        var src = $(this).attr('src');
+        currentImageIndex = images.indexOf(src);
+        showImageInFullscreen(src);
+    });
+
+    function showImageInFullscreen(src) {
+        $('#fullscreen img').attr('src', src);
+        $('#fullscreen').show();
+    }
+
+    $('#prev').on('click', function() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            showImageInFullscreen(images[currentImageIndex]);
+        }
+    });
+
+    $('#next').on('click', function() {
+        if (currentImageIndex < images.length - 1) {
+            currentImageIndex++;
+            showImageInFullscreen(images[currentImageIndex]);
+        }
+    });
 //skrypt do przełączanai obrazkow w produktach 
 $('.thumbnail').on('click', function() {
 	var src = $(this).attr('src');
@@ -88,7 +119,7 @@ $('.thumbnail').on('click', function() {
 
 $('#current-image').on('click', function() {
 	var src = $(this).attr('src');
-	$('body').append('<div id="fullscreen"><img src="' + src + '" /><span id="close">Zamknij</span></div>');
+	$('body').append('<div id="fullscreen"><span id="prev" class="arrow">&#10094;</span> <!-- Strzałka w lewo --><img src="' + src + '" /><span id="next" class="arrow">&#10095;</span> <!-- Strzałka w prawo --><span id="close">Zamknij</span></div>');
 	
 	// Zamknięcie po kliknięciu na 'Zamknij'
 	$('#close').on('click', function() {
