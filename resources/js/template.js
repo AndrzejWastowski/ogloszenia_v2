@@ -1,3 +1,4 @@
+
 $(function () {
 
 
@@ -62,7 +63,6 @@ $(function () {
 			fade: false
 		});
 
-
 	$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
 		if (!$(this).next().hasClass('show')) {
 		  $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
@@ -80,6 +80,35 @@ $(function () {
 	  $('.myCarousel').carousel({
 		interval: 2000
 	  })
+//skrypt do przełączanai obrazkow w produktach 
+$('.thumbnail').on('click', function() {
+	var src = $(this).attr('src');
+	$('#current-image').attr('src', src);
+});
 
+$('#current-image').on('click', function() {
+	var src = $(this).attr('src');
+	$('body').append('<div id="fullscreen"><img src="' + src + '" /><span id="close">Zamknij</span></div>');
+	
+	// Zamknięcie po kliknięciu na 'Zamknij'
+	$('#close').on('click', function() {
+		$('#fullscreen').remove();
+	});
+
+	// Reagowanie na klawisz Esc
+	$(document).on('keydown', function(e) {
+		if (e.key === "Escape") {
+			$('#fullscreen').remove();
+		}
+	});
+	// Zamknięcie po kliknięciu poza obrazkiem
+	$('#fullscreen').on('click', function(e) {
+		if (e.target.id === "fullscreen") {
+			$('#fullscreen').remove();
+		}
+	});
+});
 
 });
+
+

@@ -4,7 +4,6 @@ import './bootstrap.bundle.min';
 /*	plugins */
 
 import '../plugins/simplebar/js/simplebar.min';
-import '../plugins/slick/slick.min.js';
-
+import '../plugins/slick/slick.min';
 import './template';
 

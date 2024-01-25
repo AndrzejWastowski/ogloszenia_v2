@@ -18,6 +18,7 @@
             </div>
           </div>
         <!--end breadcrumb-->
+ 
 
          <div class="card">
             <div class="row g-0">
@@ -31,14 +32,16 @@
                     $defaultImage = '/resources/brak_zdjecia_350x350.webp'; // podobnie, ścieżka względna
                     }
                 @endphp
-
-                    <img src="{{ asset($defaultImage) }}" class="m-3 img-fluid text-center border rounded cursor-pointer" alt="{{ $content->name }}">
+    <div id="gallery">
+          <div id="main-image">
+            <img src="{{ asset($defaultImage) }}" id="current-image"  class="m-3 img-fluid text-center border rounded cursor-pointer" alt="{{ $content->name }}">
+          </div>
                     <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
                         @foreach ($content->photos as $photo)
                             @php
                                 $filename = $photo->name ?? 'default';
                                 $path = 'storage/drobne/'.$content->image_path.'/' . $content->id . '/' . $filename . 'kw.webp';
- 
+
                                 if(file_exists($path)) {
                                     $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
                                     } else {
@@ -46,10 +49,14 @@
                                     }
 
                             @endphp
-
-                            <div class="col"><img src="{{ asset($defaultImage) }}" width="70" class="border rounded cursor-pointer" alt=""></div>
+                            <div class="col">
+                              <div id="thumbnails">
+                                <img  class="thumbnail" src="{{ asset($defaultImage) }}" width="70" class="border rounded cursor-pointer" alt="">
+                              </div>
+                            </div>
                         @endforeach
                     </div>
+    </div>
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -187,5 +194,9 @@
 
 
 @section('script')
+<script>
 
+  
+
+</script>
 @endsection

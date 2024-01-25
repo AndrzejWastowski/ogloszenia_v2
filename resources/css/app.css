@@ -11,9 +11,9 @@
 
 /* Theme Style CSS */
 
+@import '../plugins/slick/slick';
+@import '../plugins/slick/slick-theme';
 
-@import '../plugins/slick/slick.css';
-@import '../plugins/slick/slick-theme.css';
 
 
 
