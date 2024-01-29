@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('truck_contents', function (Blueprint $table) {
             $table->string('inscription', 14);
-            $table->string('image_path', 14)->after('inscription');
+            $table->string('image_path', 14)->nullable()->after('inscription');
         });
     }
 

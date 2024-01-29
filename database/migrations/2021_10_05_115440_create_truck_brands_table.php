@@ -26,6 +26,6 @@ class CreateTruckBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('truck_brand');
+        Schema::dropIfExists('truck_brands');
     }
 }

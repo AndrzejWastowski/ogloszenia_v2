@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('small_ads_contents', function (Blueprint $table) {
-            $table->string('image_path', 14)->after('inscription');
+            $table->string('image_path', 14)->nullable()->after('inscription');
         });
     }
 
