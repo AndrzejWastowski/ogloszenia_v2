@@ -1990,3 +1990,20 @@ input::placeholder {
     /* Efekty przy najechaniu kursorem */
     opacity: 0.8;
 }
+h6 a {
+	color:#333;
+	font-weight: bold;
+}
+h6 a:hover {
+	color:#0549c7;
+}
+.link {
+	color:#333;
+}
+.link a {
+	color:#333;
+	font-weight: bold;
+}
+.link a:hover {
+	color:#0549c7;
+}

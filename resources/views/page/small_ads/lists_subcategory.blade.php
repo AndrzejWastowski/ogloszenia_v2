@@ -136,7 +136,7 @@
                                     <div class="mb-0 float-end fw-bold">{{ $small_ads->date_end }}</div>
                                     <div class="mb-0 fw-bold"><h3>{{ $small_ads->name }}</h3></div>
                                     <div class="mb-0">{{ $small_ads->lead }}</div>
-                                    <button class="btn btn-primary" >Zobacz więcej</button>
+                                    <a class="btn btn-primary" href="{{ route('page.small_ads.show',['SmallAdsContent'=>$small_ads->id]) }}">Zobacz więcej</a>
                                 </div>
                             </div>
                         </div>

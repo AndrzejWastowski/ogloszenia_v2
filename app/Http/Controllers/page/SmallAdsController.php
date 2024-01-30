@@ -114,14 +114,30 @@ public function modyfikuj()
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-     public function category ($SmallAdsCategorie)
+     public function category ($CategorieLink)
      {
-        
         $categories = SmallAdsCategorie::with('SmallAdsSubCategories')->get();
-        $smallAds = SmallAdsContent::where('small_ads_categories_id',$SmallAdsCategorie->id)->get();;
-        $pageTitle = 'Ogłoszenia drobne - ';
+        $activeCategory = SmallAdsCategorie::where('link', $CategorieLink)->firstOrFail();
+        $today = Carbon::now();
+        $contents_top = SmallAdsContent::with(['user','photos'])
+        ->where('small_ads_categories_id', $activeCategory->id)
+        ->where('date_start', '<=', $today)
+        ->where('date_end', '>=', $today)
+        ->where('status','active')
+        ->where('top','1')
+        ->get();
 
-        return view('page.small_ads.lists',compact('pageTitle','categories','smallAds'));
+        $contents =  SmallAdsContent::with(['user','photos'])
+        ->where('small_ads_categories_id', $activeCategory->id)
+        ->where('date_start', '<=', $today)
+        ->where('date_end', '>=', $today)
+        ->where('status','active')
+        ->get();
+
+        $pageTitle = 'Ogłoszenia drobne - ';
+        $activeSubCategory = "wszystkie kategorie";
+
+        return view('page.small_ads.lists_category',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
 
      }
 
@@ -167,7 +183,7 @@ public function modyfikuj()
     */
 
         $pageTitle = 'Ogłoszenia drobne z kategori: '.$activeCategory->name.' i podkategorii: '.$activeSubCategory->name;
-        return view('page.small_ads.lists',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
+        return view('page.small_ads.lists_subcategory',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
      }
 
 }

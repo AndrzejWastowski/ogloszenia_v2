@@ -9,16 +9,14 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                        </li>
-                        <li class="breadcrumb-item" aria-current="page">Ogłoszenia drobne</li>
-                        <li class="breadcrumb-item active" aria-current="page"><strong>{{ $content->name }} </strong> </li>
+                        <li class="breadcrumb-item"><a class="link" href="{{ route('page.small_ads.lists') }}"> <i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a class="link" href="{{ route('page.small_ads.lists') }}">Ogłoszenia drobne</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><strong>{{ $content->name }}</strong></li>
                     </ol>
                 </nav>
             </div>
           </div>
         <!--end breadcrumb-->
-    
 
          <div class="card">
             <div class="row g-0">
@@ -33,8 +31,8 @@
                     }
                 @endphp
     <div id="gallery">
-          <div id="main-image">
-            <img src="{{ asset($defaultImage) }}" id="current-image"  class="m-3 img-fluid text-center border rounded cursor-pointer" alt="{{ $content->name }}">
+          <div id="main-image" class="p-3">
+            <img src="{{ asset($defaultImage) }}" id="current-image"  class="img-fluid text-center border rounded cursor-pointer" alt="{{ $content->name }}">
           </div>
                     <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
                         @foreach ($content->photos as $photo)
@@ -58,31 +56,37 @@
                     </div>
     </div>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-4">
                 <div class="card-body">
                   <h4 class="card-title">{{ $content->name }}</h4>
-                  <div class="mb-3"> 
-                    <span class="price h4"><strong>{{ $content->price }}</strong> <small>PLN</small></span> 
-                   
+                  <h6 >{{ $content->category->name }} / {{ $content->subcategory->name }} </h6>
+                  <div class="mb-3">
+                    <span class="price h4"><strong>{{ $content->price }}</strong> <small>PLN</small></span>
+
                 </div>
                   <p class="card-text fs-6">{{ $content->lead }}</p>
                   <dl class="row">
                     <dt class="col-sm-3">Model#</dt>
                     <dd class="col-sm-9">{{ $content->invoice }}</dd>
-                  
+
                     <dt class="col-sm-3">Stan</dt>
                     <dd class="col-sm-9">{{ $content->condition }}</dd>
-                  
+
                     <dt class="col-sm-3">Kontakt</dt>
                     <dd class="col-sm-9">tel: {{ $content->phone }} / mail: {{ $content->mail }}</dd>
                   </dl>
-                  
-                
+
                 <div class="d-flex gap-3 mt-3">
                     <a href="#" class="btn btn-primary">Obserwuj</a>
                     <a href="#" class="btn btn-outline-primary"><span class="text">Dodaj do koszyka</span> <i class='bx bxs-cart-alt'></i></a>
                 </div>
                 </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-body">
+                  <h4 class="card-title">{{ $content->user->name }}</h4>
+
+                  <h6 ><a href="{{ route('page.dashboard.user',['UserID'=>$content->user->id]) }}">więcej od tego użytkownika</a></h6>
               </div>
             </div>
             <hr/>

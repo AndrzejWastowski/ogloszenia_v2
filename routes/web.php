@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\SocialiteLoginController;
 use App\Http\Controllers\page\StartController;
 use App\Http\Controllers\page\SmallAdsController;
-
+use App\Http\Controllers\page\EstatesController;
+use App\Http\Controllers\page\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,8 +28,9 @@ Route::get('/drobne/oferta/{SmallAdsContent}', [SmallAdsController::class, 'show
 Route::get('/drobne/{SmallAdsCategorie}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
 Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsController::class, 'subCategory'])->name('page.small_ads.subCategory');
 
+Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.estates.all');
 
-
+Route::get('/uztkownicy/tablica/{UserID}', [DashboardController::class, 'userDashboard'])->name('page.dashboard.user');
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);

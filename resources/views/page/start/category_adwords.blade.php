@@ -8,17 +8,17 @@
 
                     <div class="d-flex align-items-center mb-1">
                         <div class="product-img">
-                            <img src="assets/images/icons/elektronika.png" class="p-1" alt="">
+                            <a href="{{ route('page.small_ads.category',['elektronika']) }}" title="Elektronia telewizory smartfony pralki laptopy komputery podzespoły"><img src="assets/images/icons/elektronika.png" class="p-1" alt="Elektronia AGD/RTV/Smartfony tablety"></a>
                         </div>
                         <div class="ps-3">
-                            <h6 class="mb-0 font-weight-bold">Elektronika</h6>
+                            <h6 class="mb-0 font-weight-bold"><a href="{{ route('page.small_ads.category',['elektronika']) }}" title="Elektronia telewizory smartfony pralki laptopy komputery podzespoły">Elektronika</a></h6>
                         </div>
                         <p class="ms-auto mb-0"><i class="bx bxs-star text-warning mr-1"></i> 5.00</p>
                     </div>
 
                     <div class="d-flex align-items-center mb-1">
                         <div class="product-img">
-                            <img src="assets/images/icons/nieruchomosci.png" class="p-1" alt="">
+                            <a href="{{ route('page.estates.all') }}" title="nieruchomości, domy, mieszkania, działki budowlane"><img src="assets/images/icons/nieruchomosci.png" class="p-1" alt="Nieruchomości"></a>
                         </div>
                         <div class="ps-3">
                             <h6 class="mb-0 font-weight-bold">Mieszkania i nieruchomości</h6>
