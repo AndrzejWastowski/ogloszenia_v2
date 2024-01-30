@@ -10,8 +10,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a class="link" href="{{ route('page.small_ads.lists') }}"> <i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item" aria-current="page"><a class="link" href="{{ route('page.small_ads.lists') }}">Ogłoszenia drobne</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><strong>{{ $content->name }}</strong></li>
+                        <li class="breadcrumb-item" aria-current="page"><a class="link" href="{{ route('page.small_ads.lists') }}">Ogłoszenia użytkownika</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><strong> {{ $user->login }}</strong></li>
                     </ol>
                 </nav>
             </div>
@@ -21,93 +21,30 @@
          <div class="card">
             <div class="row g-0">
               <div class="col-md-4 border-end">
-                @php
-                    $filename = $content->topPhoto->first()->name ?? 'default';
-                    $path = 'storage/drobne/'.$content->image_path.'/' . $content->id . '/' . $filename . '.webp';
-                    if(file_exists($path)) {
-                        $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
-                        } else {
-                    $defaultImage = '/resources/brak_zdjecia_350x350.webp'; // podobnie, ścieżka względna
-                    }
-                @endphp
-    <div id="gallery">
-          <div id="main-image" class="p-3">
-            <img src="{{ asset($defaultImage) }}" id="current-image"  class="img-fluid text-center border rounded cursor-pointer" alt="{{ $content->name }}">
-          </div>
-                    <div class="row mb-3 row-cols-auto g-2 justify-content-center mt-3">
-                        @foreach ($content->photos as $photo)
-                            @php
-                                $filename = $photo->name ?? 'default';
-                                $path = 'storage/drobne/'.$content->image_path.'/' . $content->id . '/' . $filename . 'kw.webp';
-
-                                if(file_exists($path)) {
-                                    $defaultImage = $path; // tutaj używamy ścieżki względnej, ponieważ asset() generuje URL na podstawie ścieżki publicznej
-                                    } else {
-                                    $defaultImage = '/resources/brak_zdjecia_350x350.webp'; // podobnie, ścieżka względna
-                                    }
-
-                            @endphp
-                            <div class="col">
-                              <div id="thumbnails">
-                                <img  class="thumbnail" src="{{ asset($defaultImage) }}" width="70" class="border rounded cursor-pointer" alt="">
-                              </div>
-                            </div>
-                        @endforeach
-                    </div>
-    </div>
+                <h4 class="card-title">{{ $user->name }}</h4>
               </div>
               <div class="col-md-4">
                 <div class="card-body">
-                  <h4 class="card-title">{{ $content->name }}</h4>
-                  <h6 >{{ $content->category->name }} / {{ $content->subcategory->name }} </h6>
+                  <h4 class="card-title">{{ $user->name }}</h4>
+                  <h6 >Reputacja</h6>
                   <div class="mb-3">
-                    <span class="price h4"><strong>{{ $content->price }}</strong> <small>PLN</small></span>
-
                 </div>
-                  <p class="card-text fs-6">{{ $content->lead }}</p>
-                  <dl class="row">
-                    <dt class="col-sm-3">Model#</dt>
-                    <dd class="col-sm-9">{{ $content->invoice }}</dd>
-
-                    <dt class="col-sm-3">Stan</dt>
-                    <dd class="col-sm-9">{{ $content->condition }}</dd>
-
-                    <dt class="col-sm-3">Kontakt</dt>
-                    <dd class="col-sm-9">tel: {{ $content->phone }} / mail: {{ $content->mail }}</dd>
-                  </dl>
-
                 <div class="d-flex gap-3 mt-3">
                     <a href="#" class="btn btn-primary">Obserwuj</a>
-                    <a href="#" class="btn btn-outline-primary"><span class="text">Dodaj do koszyka</span> <i class='bx bxs-cart-alt'></i></a>
                 </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="card-body">
-                  <h4 class="card-title">{{ $content->user->name }}</h4>
-                  <h6 ><a href="{{ route('page.dashboard.user',['UserID'=>$content->user->id]) }}">więcej od tego użytkownika</a></h6>
+                  <h4 class="card-title">{{ $user->name }}</h4>
+
+                 kolumna dwa
               </div>
             </div>
             <hr/>
             <div class="card-body">
-                <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
-                            <div class="d-flex align-items-center">
-                                <div class="tab-icon"><i class='bx bx-comment-detail font-18 me-1'></i>
-                                </div>
-                                <div class="tab-title"> Opis szczegółowy</div>
-                            </div>
-                        </a>
-                    </li>
-
-                </ul>
-                <div class="tab-content pt-3">
-                    <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                        {{ $content->description}}
-                    </div>
- 
-                </div>
+                tu lista ogłoszeń
+                
             </div>
 
           </div>
@@ -189,8 +126,7 @@
                       </div>
                    </div>
                </div>
-            
-          
+
     </div>
 </div>
 @endsection
@@ -199,7 +135,7 @@
 @section('script')
 <script>
 
-  
+
 
 </script>
 @endsection

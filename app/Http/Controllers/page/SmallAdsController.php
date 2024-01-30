@@ -90,7 +90,7 @@ public function modyfikuj()
 
         $pageTitle = 'Ogłoszenia drobne';
 
-        return view('page.small_ads.lists',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
+        return view('page.small_ads.lists_subcategory',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
     }
 
     /**

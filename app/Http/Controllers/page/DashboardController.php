@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\page;
 use App\Http\Controllers\Controller;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -22,8 +23,11 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function userDashboard ($UserId)
     {
-        return view('home');
+
+        $user = User::where('id', $UserId)->firstOrFail();
+        $content = '';
+        return view('page.dashboard.user_dashboard',compact('content','user'));
     }
 }

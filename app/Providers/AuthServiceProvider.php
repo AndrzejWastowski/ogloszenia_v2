@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use Illuminate\Support\Facades\Auth;
+
 
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -21,6 +23,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        Auth::provider('md5-provider', function($app, array $config) {
+            // Zwróć instancję Md5UserProvider
+            return new Md5UserProvider();
+        });
     }
 }

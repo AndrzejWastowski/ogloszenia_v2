@@ -30,7 +30,7 @@ Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsContro
 
 Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.estates.all');
 
-Route::get('/uztkownicy/tablica/{UserID}', [DashboardController::class, 'userDashboard'])->name('page.dashboard.user');
+Route::get('/uzytkownicy/tablica/{UserID}', [DashboardController::class, 'userDashboard'])->name('page.dashboard.user');
 
 Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
