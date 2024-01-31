@@ -21,6 +21,9 @@ use App\Http\Controllers\page\DashboardController;
 
 
 Route::get('/', [StartController::class, 'index'])->name('page.start');
+Route::get('/regulamin', [StartController::class, 'index'])->name('page.regulamin');
+Route::get('/polityka_prywatnosci', [StartController::class, 'index'])->name('page.polityka_prywatnosci');
+
 Route::get('/drobne', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
 //Route::get('/drobne/modyfikuj', [SmallAdsController::class, 'modyfikuj'])->name('page.small_ads.modyfikuj');
 Route::get('/drobne/all', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
@@ -32,10 +35,10 @@ Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.esta
 
 Route::get('/uzytkownicy/tablica/{UserID}', [DashboardController::class, 'userDashboard'])->name('page.dashboard.user');
 
-Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle']);
+Route::get('login/google', [SocialiteLoginController::class, 'redirectToGoogle'])->name('redirectToGoogle');
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
 
-Route::get('login/facebook', [SocialiteLoginController::class, 'redirectToFacebook']);
+Route::get('login/facebook', [SocialiteLoginController::class, 'redirectToFacebook'])->name('redirectToFacebook');
 Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
 
 Auth::routes();

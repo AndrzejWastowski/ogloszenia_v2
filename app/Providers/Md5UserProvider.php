@@ -25,6 +25,7 @@ class Md5UserProvider implements UserProvider
 
     public function retrieveByCredentials(array $credentials)
     {
+       
         // Znajdź użytkownika na podstawie dostarczonych poświadczeń
         if (empty($credentials) || 
             (count($credentials) === 1 &&
@@ -32,27 +33,33 @@ class Md5UserProvider implements UserProvider
             return;
         }
 
-        return User::where('login', $credentials['login'])->first();
+        return User::where('email', $credentials['email'])->first();
     }
 
     public function validateCredentials(Authenticatable $user, array $credentials)
 {
     $plain = $credentials['password'];
+    //dd('walidacja hasła');
+    // jeśli w bazie jest zapisane hasło użytkownika to najpierw sprawdź hasło za pomocą standardowego mechanizmu Laravela
+    if ($user->getAuthPassword()!="")
+        {
+           // dd('sprawdzamy nową  metodą');
+            if (Hash::check($plain, $user->getAuthPassword())) {
+                return true;
+            }
+        }
+         else {
+            //dd('stara metoda - md5'.$user->oldpassword);
+            // Jeśli standardowe hasło nie pasuje, spróbuj z MD5
+            if (!empty($user->oldpassword) && md5($plain) == $user->oldpassword) {
+                // Skasuj stare hasło MD5 i zapisz nowe hashowane przez Laravel
+                $user->oldpassword = null;
+                $user->password = Hash::make($plain);
+                $user->save();
 
-    // Najpierw sprawdź hasło za pomocą standardowego mechanizmu Laravela
-    if (Hash::check($plain, $user->getAuthPassword())) {
-        return true;
-    }
-
-    // Jeśli standardowe hasło nie pasuje, spróbuj z MD5
-    if (!empty($user->oldpassword) && md5($plain) == $user->oldpassword) {
-        // Skasuj stare hasło MD5 i zapisz nowe hashowane przez Laravel
-        $user->oldpassword = null;
-        $user->password = Hash::make($plain);
-        $user->save();
-
-        return true;
-    }
+                return true;
+            }
+        }
 
     return false;
 }

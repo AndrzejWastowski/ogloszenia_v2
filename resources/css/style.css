@@ -114,7 +114,7 @@ a {
 .primary-menu .navbar .navbar-nav a.nav-link:active,
 .primary-menu .navbar .navbar-nav a.nav-link:focus {
 	color: #ffffff;
-	background-color: #8833ff;
+	background-color: #0549c7;
 }
 .primary-menu .navbar .navbar-nav a.nav-link:hover {
 	color: #32393f;
@@ -123,7 +123,7 @@ a {
 .primary-menu .navbar .navbar-nav a.nav-link.active:hover,
 .primary-menu .navbar .navbar-nav a.nav-link.active {
 	color: #ffffff;
-	background-color: #8833ff;
+	background-color: #0549c7;
 }ul.scroll-menu {
 	overflow-x: auto;
 	height: auto;
@@ -1099,8 +1099,8 @@ a {
 }
 /* Navs and Tabs */
 .nav-primary.nav-tabs .nav-link.active {
-	color: #8833ff;
-	border-color: #8833ff #8833ff #fff;
+	color: #0549c7;
+	border-color: #0549c7 #0549c7 #fff;
 }
 .nav-danger.nav-tabs .nav-link.active {
 	color: #e62e2e;
@@ -1190,8 +1190,8 @@ a {
 	background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100)) !important;
 }
 .split-bg-primary {
-	background-color: #7122e0;
-	border-color: #7122e0;
+	background-color: #0549c7;
+	border-color: #0549c7;
 }
 .split-bg-secondary {
 	background-color: #515a62;
@@ -1287,7 +1287,7 @@ a {
 }
 .authentication-header {
 	position: absolute;
-	background: #8833ff;
+	background: #0549c7;
 	top: 0;
 	left: 0;
 	right: 0;
