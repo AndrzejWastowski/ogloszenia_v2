@@ -8,7 +8,7 @@
             <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
                 <div class="col mx-auto">
                     <div class="my-4 text-center">
-                        <img src="assets/images/logo-img.png" width="180" alt="" />
+                        <img src="{{ asset('assets/images/logo-icon.png') }}" width="180" alt="" />
                     </div>
                     <div class="card rounded-4">
                         <div class="card-body">
@@ -19,11 +19,11 @@
                                     </p>
                                 </div>
                                 <div class="d-grid">
-                                    <a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span class="d-flex justify-content-center align-items-center">
+                                    <a class="btn my-4 shadow-sm btn-white" href="{{ route('redirectToProvider',['provider'=>'google']) }}"> <span class="d-flex justify-content-center align-items-center">
                       <img class="me-2" src="assets/images/icons/search.svg" width="16" alt="Image Description">
                       <span>{{ __('passwords.Sign Up with Google') }}</span>
                                         </span>
-                                    </a> <a href="javascript:;" class="btn btn-facebook"><i class="bx bxl-facebook"></i>{{ __('passwords.Sign Up with Facebook') }}</a>
+                                    </a> <a href="{{ route('redirectToProvider',['provider'=>'facebook']) }}" class="btn btn-facebook"><i class="bx bxl-facebook"></i>{{ __('passwords.Sign Up with Facebook') }}</a>
                                 </div>
                                 <div class="login-separater text-center mb-4"> <span>{{ __('passwords.OR SIGN UP WITH EMAIL') }}</span>
                                     <hr/>
@@ -72,10 +72,10 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                         
+
                                             <label for="password-confirm"
                                             class="col-md-12 col-form-label">{{ __('passwords.Confirm Password') }}</label>
-    
+
                                         <div class="col-12">
                                             <input id="password-confirm" type="password" class="form-control"
                                                 name="password_confirmation" required autocomplete="new-password">

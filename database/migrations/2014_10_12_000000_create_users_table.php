@@ -14,18 +14,27 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('facebook_id')->nullable()->unique();
-            $table->string('google_id')->nullable()->unique();
-            $table->string('name');
-            $table->string('email')->nullable()->unique();
+            $table->id();
+            // Przykładowo zmniejszona długość dla ID zewnętrznych, jeśli znana jest ich maksymalna długość
+            $table->string('facebook_id', 191)->nullable()->unique();
+            $table->string('google_id', 191)->nullable()->unique();
+            $table->string('name', 191);
+            $table->string('family_name', 191)->nullable();
+            $table->string('login', 191)->nullable()->index(); // Dodanie indeksu, jeśli będzie używane do wyszukiwania
+            $table->string('email', 191)->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->string('city')->nullable();
-            $table->string('zip')->nullable();
-            $table->string('country')->nullable();
-            $table->string('adress')->nullable();
-            $table->rememberToken();
+            $table->boolean('email_verified')->nullable(); // Zmiana na boolean
+            $table->char('locale', 2)->nullable(); // Zmiana na CHAR dla stałej długości
+            $table->string('avatar', 191)->nullable();
+            $table->string('password', 191)->nullable();
+            $table->string('oldpassword', 32)->nullable();
+            $table->string('city', 191)->nullable();
+            $table->string('zip', 191)->nullable();
+            $table->string('country', 191)->nullable();
+            $table->string('adress', 191)->nullable();
+            $table->string('remember_token', 100)->nullable();
+            $table->string('social_id', 191)->nullable();
+            $table->string('social_type', 191)->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateCarsModelsTable extends Migration
     public function up()
     {
         Schema::create('cars_models', function (Blueprint $table) {
-            $table->increments('id')->omment('unikatowy identyfikator');
+            $table->increments('id')->comment('unikatowy identyfikator');
             $table->integer('cars_brands_id')->comment('klucz łączący modele z marką auta');            
             $table->string('name', 75)->comment('model auta , polaczony z marką');
         });
