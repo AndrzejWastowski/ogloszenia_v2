@@ -10,6 +10,7 @@ use App\Http\Controllers\page\PageController;
 use App\Http\Controllers\page\SmallAdsController;
 use App\Http\Controllers\page\EstatesController;
 use App\Http\Controllers\page\DashboardController;
+use App\Http\Controllers\page\UserDashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,13 +34,19 @@ Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsContro
 
 Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.estates.all');
 
-Route::get('/uzytkownicy/tablica/{UserID}', [DashboardController::class, 'userDashboard'])->name('page.dashboard.user');
+Route::get('/uzytkownicy/tablica/{UserID}', [UserDashboardController::class, 'userDashboard'])->name('page.dashboard.user');
 
 
 Route::get('login/{provider}', [SocialiteLoginController::class, 'redirectToProvider'])->name('redirectToProvider');
 Route::get('login/{provider}/callback', [SocialiteLoginController::class, 'handleProviderCallback']);
 Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
+
+
+Route::get('user/twoje_ogloszenia', [UserDashboardController::class, 'your_ads'])->name('page.user.your_ads');
+Route::get('user/dodaj_ogloszenie_drobne', [UserDashboardController::class, 'small_ads_add'])->name('page.user.small_ads_add');
+Route::post('user/dodaj_ogloszenie_drobne/add', [UserDashboardController::class, 'small_ads_add'])->name('page.user.small_ads_content_post');
+
 
 $regulamin =  ['page'=>'page','param'=>'regulamin'];
 

@@ -151,7 +151,7 @@
                 <div class="menu-box dropdown px-3">
                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                        <img src="{{ (Auth::user()->avatar) }}" class="user-img" alt="user avatar">
                         <div class="user-info ps-3">
                             <p class="user-name mb-0"> {{ Auth::user()->name }}</p>
 
@@ -159,7 +159,7 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="javascript:;"><i
+                        <li><a class="dropdown-item" href="{{ route('page.user.your_ads') }}"><i
                                     class='bx bx-home-circle'></i><span>{{ __('auth.your_ads') }}</span></a></li>
                         <li><a class="dropdown-item" href="javascript:;"><i
                                     class='bx bx-dollar-circle'></i><span>{{ __('auth.payments') }}</span></a></li>
