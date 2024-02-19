@@ -50,6 +50,10 @@ Route::get('user/dodaj_ogloszenie_drobne', [UserDashboardController::class, 'sma
 Route::post('user/dodaj_ogloszenie_drobne/add', [UserDashboardController::class, 'small_ads_add'])->name('page.user.small_ads_content_post');
 
 
+//przyklad trasy sprwdzajacej uprawnienia uzytkownika
+Route::get('/admin', 'AdminController@index')->middleware('auth', 'checkPermission:admin');
+
+
 $regulamin =  ['page'=>'page','param'=>'regulamin'];
 
 

@@ -33,6 +33,7 @@ class User extends Authenticatable
         'avatar',
         'google_id',
         'email_verified_at',
+        'permission',
         'locale',
         'social_id',
         'social_type'
@@ -69,4 +70,52 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+     /**
+     * Check if the user is an normal.
+     *
+     * @return bool
+     */
+    public function isUser()
+    {
+        return $this->permission == 0;
+    }
+
+    /**
+     * Check if the user is an editor/redaktor.
+     *
+     * @return bool
+     */
+
+    public function isEditor()
+    {
+        return $this->permission == 1;
+    }
+
+/**
+     * Check if the user is an admin
+     *
+     * @return bool
+     */
+
+    public function isAdmin()
+    {
+        return $this->permission == 2;
+    }
+
+    /**
+     * Check if the user is mixed permision an editor or admin
+     *
+     * @return bool
+     */
+
+    public function isEditorOrAdmin()
+{
+    return $this->isEditor() || $this->isAdmin();
+}
+
+    public function group()
+    {
+        return $this->belongsTo(UserGroup::class, 'users_groups_id');
+    }
 }
