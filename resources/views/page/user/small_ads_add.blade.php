@@ -117,12 +117,22 @@
                                     <label class="form-label" for="small_ads_sub_categories_id"><strong>Podkategoria</strong></label>
                                     <select class="form-select" name="small_ads_sub_categories_id" id="small_ads_sub_categories_id" required>
                                         <option value="" diabled selected="">Wybierz najpierw kategorię</option>
-                                        @foreach($subcategories as $subcategory)
-                                        <option value="{{$subcategory->id}}" {{ ($subcategory->id == $content->small_ads_sub_categories_id ? 'selected' : '') }} >{{$subcategory->name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
-                                                
+                                <h6 class="mb-0 text-uppercase">Date Time Pickers</h6>
+                                <hr/>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Pick a Date</label>
+                                            <input type="text" class="form-control datepicker" />
+                                        </div>
+                                        <div class="">
+                                            <label class="form-label">Time Picker</label>
+                                            <input type="text" class="form-control timepicker" />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_start"><strong>Start ogłoszenia</strong></label>
                                     <input placeholder="Data publikacji" type="text" id="date_start" name="date_start" value='{{ $content->date_start ?? ''}}' class="form-control datepicker" data-provide="datepicker" required>
@@ -151,45 +161,45 @@
                                     <label class="form-label"  for="description"><strong>Treść - pełny opis wyświetlany w  rozwinięciu ogłoszenia</strong> <small>(min. 35 znaków max. 2500)* </label><br>
                                     <textarea class="form-control rounded-2 p-2" id="description" name="description" rows="10" placeholder="Treść ogłoszenia (od 30 do 3000 znaków)" required>{{ $content->description ?? ''}}</textarea>
                                 </div>
-                    
+
                                 <div class="col-md-3 mb-4">
                                     <label class="form-label" for="price"><strong>Cena</strong></label>
                                     <input type="text" id="price" name="price" class="form-control" placeholder="Cena" value="{{ $content->price ?? ''}}" required>
                                 </div>
-                                
+
                                 <div class="col-md-3 mb-4">
                                     <label class="form-label" for="items"><strong>ile sztuk</strong></label>
                                     <input type="text" id="items" name="items" class="form-control" placeholder="sztuk" value="{{ $content->items ?? '' }}" required>
-                                </div>   
+                                </div>
                                  <div class="col-md-6">
-                                    <label for="invoice"><strong>Rodzaj wystawianego rachunku</strong></label>
-                                    <select class="form-select" id="invoices" name="invoice" required> 
+                                    <label for="invoices"><strong>Rodzaj wystawianego rachunku</strong></label>
+                                    <select class="form-select" id="invoices" name="invoice" required>
                                         <option value="0" diabled selected="">Wybierz rodzaj rachunku</option>
                                         <option value="Nie wystawiam faktury" >Nie wystawiam faktury</option>
                                         <option value="Faktura VAT">Faktura z VAT</option>
                                         <option value="Faktura Vat-marża">Faktura Vat-marża</option>
-                                        <option value="Faktura bez VAT">Faktura bez VAT</option>                              
-                                    </select>                                 
+                                        <option value="Faktura bez VAT">Faktura bez VAT</option>
+                                    </select>
                                 </div>
-                                                
-                                <div class="col-md-12">                 
-                                    <label class=""><strong>Rodzaj oferty</strong></label>                
+
+                                <div class="col-md-12">
+                                    <label class=""><strong>Rodzaj oferty</strong></label>
                                 </div>
-                                <div class="col-md-4 mb-4">                
+                                <div class="col-md-4 mb-4">
                                     <input type="radio" class="form-check-input" id="conditionNew" name="condition" value="nowe" checked>
-                                    <label class="form-check-label" for="condition_new">Produkt nowy</label>
+                                    <label class="form-check-label" for="conditionNew">Produkt nowy</label>
                                 </div>
                                 <div class="col-md-4 mb-4">
                                     <input type="radio" class="form-check-input" id="conditionUsed" name="condition" value="używane" >
                                     <label class="form-check-label" for="conditionUsed">Produkt używany</label>
                                 </div>
-                                
-                                <div class="col-md-6">          
+
+                                <div class="col-md-6">
                                     <label for="contact_phone" value=""><strong>Telefon kontaktowy</strong></label>
                                     <input name="contact_phone" class="form-control"  id="contact_phone"  value="{{ $user->phone ?? '' }}">
                                 </div>
-                                
-                                <div class="col-md-6">                 
+
+                                <div class="col-md-6">
                                     <label for="contact_email" ><strong>Adres e-mail</strong></label><br>
                                     <input name="contact_email" class="form-control"  id="contact_email" value="{{ $user->email ?? '' }}">
                                 </div>
@@ -200,14 +210,12 @@
                                         </button>
                                     </div>
                                 </div>
-                    
-                    </div> 
+                    </div>
 
                 </div>
             </div>
         @endsection
 
-
         @section('script')
-            <script></script>
+        @vite(['resources/js/small_ads_script.js']) // Indywidualny skrypt dla tej podstrony
         @endsection

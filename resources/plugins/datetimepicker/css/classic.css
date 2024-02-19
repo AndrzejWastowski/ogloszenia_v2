@@ -63,7 +63,7 @@
   min-width: 176px;
   max-width: 466px;
   max-height: 0;
-
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   -moz-opacity: 0;
   opacity: 0;
@@ -85,7 +85,7 @@
  */
 .picker--opened .picker__holder {
   max-height: 25em;
-  
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
   filter: alpha(opacity=100);
   -moz-opacity: 1;
   opacity: 1;

@@ -49,10 +49,12 @@ class UserDashboardController extends Controller
         $content = new SmallAdsContent();
         $content->date_start = now();
         $categories =  SmallAdsCategorie::All();
-        $subcategories =  SmallAdsSubCategorie::All();
+        $subcategories = new SmallAdsSubCategorie();
+
+     
        
         $sidebar = 'twoje_ogloszenia';
         $sidebar_element = 'small_ads_add';
-        return view('page.user.small_ads_add',compact('content','user','sidebar','categories','subcategories'));
+        return view('page.user.small_ads_add',compact('content','user','sidebar','categories'));
     }
 }

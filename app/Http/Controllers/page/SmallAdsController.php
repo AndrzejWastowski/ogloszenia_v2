@@ -186,4 +186,11 @@ public function modyfikuj()
         return view('page.small_ads.lists_subcategory',compact('pageTitle','contents_top','contents','categories','activeCategory','activeSubCategory'));
      }
 
+     public function getSubcategory($categoriesId)  {
+
+        $activeSubCategory = SmallAdsSubCategorie::select('id', 'name')->where('small_ads_categories_id', $categoriesId)->get();
+
+        return Response()->json($activeSubCategory);
+    }
+
 }

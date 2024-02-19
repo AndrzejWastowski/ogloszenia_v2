@@ -29,8 +29,10 @@ Route::get('/drobne', [SmallAdsController::class, 'lists'])->name('page.small_ad
 //Route::get('/drobne/modyfikuj', [SmallAdsController::class, 'modyfikuj'])->name('page.small_ads.modyfikuj');
 Route::get('/drobne/all', [SmallAdsController::class, 'lists'])->name('page.small_ads.lists');
 Route::get('/drobne/oferta/{SmallAdsContent}', [SmallAdsController::class, 'show'])->name('page.small_ads.show');
+Route::get('/drobne/getSubcategory/{categoryID}', [SmallAdsController::class, 'getSubcategory'])->name('page.small_ads.getSubcategory');
 Route::get('/drobne/{SmallAdsCategorie}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
 Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsController::class, 'subCategory'])->name('page.small_ads.subCategory');
+
 
 Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.estates.all');
 
