@@ -46,8 +46,10 @@ Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoo
 
 
 Route::get('user/twoje_ogloszenia', [UserDashboardController::class, 'your_ads'])->name('page.user.your_ads');
-Route::get('user/dodaj_ogloszenie_drobne', [UserDashboardController::class, 'small_ads_add'])->name('page.user.small_ads_add');
-Route::post('user/dodaj_ogloszenie_drobne/add', [UserDashboardController::class, 'small_ads_add'])->name('page.user.small_ads_content_post');
+Route::get('user/dodaj_ogloszenie_drobne', [SmallAdsController::class, 'small_ads_add'])->name('page.user.small_ads_add');
+Route::post('user/dodaj_ogloszenie_drobne', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_content_post');
+Route::get('user/dodaj_ogloszenie_drobne/photo', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_photo');
+Route::post('user/dodaj_ogloszenie_drobne/photo', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_photo');
 
 
 //przyklad trasy sprwdzajacej uprawnienia uzytkownika

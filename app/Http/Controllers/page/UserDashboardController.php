@@ -43,18 +43,5 @@ class UserDashboardController extends Controller
         return view('page.user.your_ads',compact('content','user','sidebar'));
     }
 
-    public function small_ads_add()
-    {
-        $user = Auth::user();
-        $content = new SmallAdsContent();
-        $content->date_start = now();
-        $categories =  SmallAdsCategorie::All();
-        $subcategories = new SmallAdsSubCategorie();
 
-     
-       
-        $sidebar = 'twoje_ogloszenia';
-        $sidebar_element = 'small_ads_add';
-        return view('page.user.small_ads_add',compact('content','user','sidebar','categories'));
-    }
 }

@@ -10,8 +10,7 @@ import '../plugins/datetimepicker/js/picker.js';
 import '../plugins/datetimepicker/js/picker.time.js';
 import '../plugins/datetimepicker/js/picker.date.js';
 
-
-
+import '../plugins/datetimepicker-master/jquery.datetimepicker.full.min.js';
 
 import './template';
 

@@ -16,6 +16,12 @@
 @import '../plugins/slick/slick-theme';
 
 
+@import '../plugins/datetimepicker/css/classic.css';
+@import '../plugins/datetimepicker/css/classic.time.css';
+@import '../plugins/datetimepicker/css/classic.date.css';
+
+@import '../plugins/datetimepicker-master/jquery.datetimepicker.min.css';
+
 
 
 

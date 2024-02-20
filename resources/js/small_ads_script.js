@@ -1,6 +1,36 @@
 
 $(function () {
 
+
+    const date = new Date();
+    const date_end = new Date();
+    date_end.setDate(date.getDate() + 30); // Dodaje 30 dni do obecnej daty
+
+
+    $.datetimepicker.setLocale('pl');
+    jQuery('#date_start').datetimepicker({
+        i18n:{
+         pl:{
+          months:[
+           'Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','listopad','Grudzień',
+          ],
+          dayOfWeek:[
+           "Nd", "Pn", "Wt", "Śr","Cz", "Pt", "Sb",
+          ]
+         }
+        },
+        timepicker:true,
+        format:'Y-m-d H:i',
+        mask:false,
+        minDate:0, // today
+        maxDate:date_end, // today
+        startDate: date,
+        defaultDate:date,
+       });
+
+
+
+
     const form = document.querySelector("form");
     const input = form.querySelector("input");
 
@@ -16,11 +46,11 @@ $(function () {
         }
     })
 
-    const date = new Date();
 
-   
+
+
     $('#price').on("change", function (e) {
- 
+
         value = e.target.value;
         var strReg = "^([0-9\.\-])";
         var regex = new RegExp(strReg);
@@ -50,7 +80,5 @@ $(function () {
             $('#small_ads_sub_categories_id').empty();
         }
 
-
-        
     });
 });
