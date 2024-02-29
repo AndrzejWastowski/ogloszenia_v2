@@ -2,7 +2,11 @@
 namespace App\Enums;
 
 enum Status: string {
-    case New = 'new';
-    case InProgress = 'in_progress';
-    case Completed = 'completed';
+
+    case unfinished = 'unfinished';
+    case active = 'active';
+    case disabled = 'disabled';
+    case removed ='removed';
+    case blocked = 'blocked';
+    
 }

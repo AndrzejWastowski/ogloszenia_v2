@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\page;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
+
 use App\Models\SmallAdsCategorie;
 use App\Models\SmallAdsSubCategorie;
 use App\Models\SmallAdsContent;
+use App\Validators\Validator;
 use App\Models\SmallAdsPhoto;
-use App\Enums\Invoice;
-use App\Enums\Status;
+
+use App\Http\Requests\SmallAdsRequest;
+
 use Carbon\Carbon;
 use App\Services\ImageService;
 
@@ -196,7 +198,7 @@ public function modyfikuj()
         return Response()->json($activeSubCategory);
     }
 
-    public function small_ads_add()
+    public function content_form()
     {
         $user = Auth::user();
         $content = new SmallAdsContent();
@@ -206,29 +208,25 @@ public function modyfikuj()
 
         $sidebar = 'twoje_ogloszenia';
         $sidebar_element = 'small_ads_add';
-        return view('page.user.small_ads_add',compact('content','user','sidebar','categories'));
+        return view('page.user.small_ads.content_form',compact('content','user','sidebar','categories','sidebar_element'));
     }
-    public function small_ads_add_send(Request $request) {
+    public function content_post(SmallAdsRequest $request) {
 
+        dd($request);
+        $validated = $request->validated();
+        dd($validated);
+        $content = new SmallAdsContent();
+        $content->save($validated);
 
-        $validatedData = $request->validate([
-            'small_ads_classified_enum' => 'required|in:7,14,30',
-            'small_ads_categories_id' => 'required|min:6',
-            'small_ads_sub_categories_id' => 'required|min:1|max',
-            'date_start' => 'required|min:1|max',
-            'date_end' => 'required|in:7,14,30',
-            'name' => 'required|max:255',
-            'lead' => 'required|max:255',
-            'description' => 'required|max:255',
-            'price' => 'required|max:255',
-            'items' => 'required|max:255',
-            'invoice' => ['required',Rule::in(Invoice::cases())],
-            'condition' => 'required|max:255',
-            'contact_phone' => 'required|max:255',
-            'contact_email' => 'required|email|unique:users,email'
-        ]);
-        dd($validatedData);
-        return redirect('page.user.small_ads_photo'); // Przekierowanie na stronę sukcesu.
+       
+        return redirect()->route('page.user.small_ads.photo_form'); // Przekierowanie na stronę sukcesu.
+    }
+
+    public function photo_form(Request $request) {
+        $user = Auth::user();
+        $sidebar = 'twoje_ogloszenia';
+        $sidebar_element = 'small_ads_add';
+        return view('page.user.small_ads.photo_form',compact('user','sidebar',));
     }
 
 }

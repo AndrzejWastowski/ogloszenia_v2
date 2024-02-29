@@ -46,10 +46,10 @@ Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoo
 
 
 Route::get('user/twoje_ogloszenia', [UserDashboardController::class, 'your_ads'])->name('page.user.your_ads');
-Route::get('user/dodaj_ogloszenie_drobne', [SmallAdsController::class, 'small_ads_add'])->name('page.user.small_ads_add');
-Route::post('user/dodaj_ogloszenie_drobne', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_content_post');
-Route::get('user/dodaj_ogloszenie_drobne/photo', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_photo');
-Route::post('user/dodaj_ogloszenie_drobne/photo', [SmallAdsController::class, 'small_ads_add_send'])->name('page.user.small_ads_photo');
+Route::get('user/ogloszenie_drobne/content_form', [SmallAdsController::class, 'content_form'])->name('page.user.small_ads.content_form');
+Route::post('user/ogloszenie_drobne/content_post', [SmallAdsController::class, 'content_post'])->name('page.user.small_ads.content_post');
+Route::get('user/ogloszenie_drobne/photo_form', [SmallAdsController::class, 'photo_form'])->name('page.user.small_ads.photo_form');
+Route::post('user/ogloszenie_drobne/photo_send', [SmallAdsController::class, 'photo_send'])->name('page.user.small_ads.photo_send');
 
 
 //przyklad trasy sprwdzajacej uprawnienia uzytkownika

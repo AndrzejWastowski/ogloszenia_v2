@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+content form
     <div class="page-wrapper">
          <div class="page-content mt-3">
             <div class="row">
@@ -66,7 +67,7 @@
                             </div>
                         </div>
 
-                        <form id="form" name="form" class="row g-3" action="{{ route('page.user.small_ads_content_post') }}"  method="POST" role="form" >
+                        <form id="form" name="form" class="row g-3" action="{{ route('page.user.small_ads.content_post') }}"  method="POST" role="form" >
                             <input type="hidden" name="id" value="{{ $content->id==null ? 0  : $content->id  }}">
                             @csrf
                             @if ($errors->any())
@@ -109,7 +110,7 @@
                                     <select class="form-select" name="small_ads_categories_id" id="small_ads_categories_id" required>
                                         <option value="" diabled selected="">Wybierz kategorię</option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                <option value={{ $category->id }} {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -128,9 +129,9 @@
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_end"><strong>Na ile czasu</strong></label>
                                         <select class="form-select" id="date_end" name="date_end" >
-                                            <option value="7"  {{ old('date_end') == '7' ? 'checked' : '' }}>Tydzien</option>
-                                            <option value="14" {{ old('date_end') == '14' ? 'checked' : '' }}>Dwa tygodnie</option>
-                                            <option value="30" {{ old('date_end') == '30' ? 'checked' : '' }}>Miesiąc</option>
+                                            <option value=7  {{ old('date_end') == '7' ? 'checked' : '' }}>Tydzien</option>
+                                            <option value=14 {{ old('date_end') == '14' ? 'checked' : '' }}>Dwa tygodnie</option>
+                                            <option value=30 {{ old('date_end') == '30' ? 'checked' : '' }}>Miesiąc</option>
                                         </select>
                                 </div>
 
@@ -195,6 +196,7 @@
                                         </button>
                                     </div>
                                 </div>
+                        </form>
                     </div>
 
                 </div>

@@ -72,7 +72,7 @@ $(function () {
                 success:function(data) {
                     $('#small_ads_sub_categories_id').empty();
                     $.each(data, function(key, value) {
-                        $('#small_ads_sub_categories_id').append('<option value="'+ value.small_ads_categories_id +'">'+ value.name +'</option>');
+                        $('#small_ads_sub_categories_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
                     });
                 }
             });

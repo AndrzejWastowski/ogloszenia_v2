@@ -22,7 +22,7 @@
                     <div class="row mb-1">
                       <div class="col">
                           <p class="mb-2">
-                              <a href="{{ route('page.user.small_ads_add') }}" class="list-group-item-action">
+                              <a href="{{ route('page.user.small_ads.content_form') }}" class="list-group-item-action">
                                     Dodaj "ogłoszenie drobne"
                               </a>
                           </p>
