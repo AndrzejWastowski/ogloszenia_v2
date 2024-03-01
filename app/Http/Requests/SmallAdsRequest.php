@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Validation\Validator;
 use App\Models\User;
 use App\Enums\Invoice;
 use App\Enums\Classifed;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 
 class SmallAdsRequest extends FormRequest
 {
+    private $modifiedData = [];
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -44,64 +46,10 @@ class SmallAdsRequest extends FormRequest
            'invoice' => ['required', Rule::in(Invoice::cases())],
             'condition' => [ 'string', 'min:4', 'max:35'],
             'contact_phone' => ['required','max:255'],
-            'contact_email' => ['required','email'],
+            'contact_email' => ['email'],
         ];
     }
-    protected function getValidatorInstance()
-    {
-
-        $this->getInputSource()->replace($this->sanitize($this->all()));
-
-        $validator = parent::getValidatorInstance();
-
-        $validator->after(function ($validator) {
-            if (!$validator->errors()->isEmpty()) {
-                return;
-            }
-
-            // Przykład dodatkowej logiki walidacyjnej
-            // Uwaga: Upewnij się, że wszystkie używane tutaj pola są odpowiednimi tablicami lub wartościami
-            $date_start = Carbon::createFromFormat('Y-m-d H:i', $this->date_start);
-            $date_end = $date_start->copy()->addDays($this->date_end);
-
-            if ($date_end->lessThan($date_start)) {
-                $validator->errors()->add('date_end', 'Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.');
-            }
-
-            $this->merge([
-                'id' => (int) $this->id,
-                'small_ads_categories_id' => (int) $this->small_ads_categories_id,
-                'small_ads_sub_categories_id' => (int) $this->small_ads_sub_categories_id,
-                'date_start' => $date_start->format('Y-m-d H:i'),
-                'date_end' => $date_end->format('Y-m-d H:i'),
-                'items' => (int) $this->items,
-            ]);
-
-});
-/*
-        $validator->after(function ($validator) {
-            if (!$validator->errors()->isEmpty()) {
-                return;
-            }
-            
-            //dd($this->date_start);
-            $date_start = Carbon::createFromFormat('Y-m-d H:i', $this->date_start);
-            $date_end = $date_start->copy()->addDays($this->date_end);
-
-            $this->merge([
-                'id' => (int) $this->id,
-                'small_ads_categories_id' => (int) $this->small_ads_categories_id,
-                'small_ads_sub_categories_id' => (int) $this->small_ads_sub_categories_id,
-                'date_start' => $date_start->format('Y-m-d H:i'),
-                'date_end' => $date_end->format('Y-m-d H:i'),
-                'items' => (int) $this->items,
-            ]);
-       
-        });
- */
-        return $validator;
-    }
-
+    
      /**
      * Sanitize input data.
      *
@@ -135,5 +83,41 @@ class SmallAdsRequest extends FormRequest
             'contact_email.email' => 'Podaj prawidłowy adres email.',
 
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     */
+     public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $data = $validator->getData();
+            $date_start = Carbon::createFromFormat('Y-m-d H:i', $data['date_start']);
+            $date_end = $date_start->copy()->addDays($data['date_end']);
+            $date_end = $date_end->format('Y-m-d H:i');
+            $data['id'] = (int) $data['id'];
+            $data['small_ads_categories_id'] = (int) $data['small_ads_categories_id'];
+            $data['small_ads_sub_categories_id'] = (int) $data['small_ads_sub_categories_id'];
+            $data['items'] = (int) $data['items'];
+
+
+
+            // Dodaj datę końcową do danych walidacji
+            $validator->setData(array_merge($data, ['date_end' => $date_end]));
+
+            /*
+            $this->merge([
+            'id' => (int) $this->id,
+            'small_ads_categories_id' => (int) $this->small_ads_categories_id,
+            'small_ads_sub_categories_id' => (int) $this->small_ads_sub_categories_id,
+            'date_start' => $date_start->format('Y-m-d H:i'),
+            'date_end' => $date_end->format('Y-m-d H:i'),
+            'items' => (int) $this->items,
+        ]);
+           */
+        });
     }
 }

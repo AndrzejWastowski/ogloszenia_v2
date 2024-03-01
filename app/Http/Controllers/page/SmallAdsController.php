@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 
 class SmallAdsController extends Controller
 {
+
+
     protected $imageService;
     /**
      * Create a new controller instance.
@@ -27,6 +29,7 @@ class SmallAdsController extends Controller
      */
     public function __construct(ImageService $imageService)
     {
+        $this->middleware('auth');
         $this->imageService = $imageService;
     }
 
@@ -200,9 +203,25 @@ public function modyfikuj()
 
     public function content_form()
     {
+      
         $user = Auth::user();
+        $content = SmallAdsContent::where('users_id', $user->id) // Filtruj po 'users_id'
+        ->where('status', 'unfinished') // Filtruj po 'active' = false
+        ->first(); // Pobierz pierwszy rekord z wyników
+    if ($content === null)
+    {
         $content = new SmallAdsContent();
-        $content->date_start = now();
+    }
+       // $content->date_start = now();
+
+        $data_start = Carbon::parse($content->date_start);
+        $data_end = Carbon::parse($content->date_end);
+        $roznica_dni = $data_start->diffInDays($data_end);
+   
+        $content->date_start = Carbon::parse(now())->format('Y-m-d H:i');
+
+        $content->date_end = $roznica_dni;
+
         $categories =  SmallAdsCategorie::All();
         $subcategories = new SmallAdsSubCategorie();
 
@@ -212,13 +231,27 @@ public function modyfikuj()
     }
     public function content_post(SmallAdsRequest $request) {
 
-        dd($request);
-        $validated = $request->validated();
-        dd($validated);
-        $content = new SmallAdsContent();
-        $content->save($validated);
-
        
+        $validated = $request->validated();
+        $validated['users_id'] = Auth::id();
+
+    
+        if ($validated['id']==0)
+        {
+           // Zapis danych do bazy danych
+           SmallAdsContent::create($validated); // Zastąp TwojModel nazwą Twojego modelu
+        }
+         else
+         {
+            // Znajdź istniejący rekord w bazie danych
+            $rekord = SmallAdsContent::find($validated['id']);
+
+            // Aktualizuj dane
+            $rekord->update($validated);
+         }
+
+
+
         return redirect()->route('page.user.small_ads.photo_form'); // Przekierowanie na stronę sukcesu.
     }
 

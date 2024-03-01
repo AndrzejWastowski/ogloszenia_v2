@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-content form
     <div class="page-wrapper">
          <div class="page-content mt-3">
             <div class="row">
@@ -125,13 +124,15 @@ content form
                                     <label class="form-label"  for="date_start"><strong>Start ogłoszenia</strong></label>
                                     <input placeholder="Data publikacji" id="date_start" name="date_start" class="form-control" type="text"  value="{{ $content->date_start ?? ''}}" required>
                                 </div>
-
+                                {{ dd($content->date_end ) }}
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_end"><strong>Na ile czasu</strong></label>
                                         <select class="form-select" id="date_end" name="date_end" >
-                                            <option value=7  {{ old('date_end') == '7' ? 'checked' : '' }}>Tydzien</option>
-                                            <option value=14 {{ old('date_end') == '14' ? 'checked' : '' }}>Dwa tygodnie</option>
-                                            <option value=30 {{ old('date_end') == '30' ? 'checked' : '' }}>Miesiąc</option>
+
+                                          
+                                            <option value=7  {{ old('date_end') == '7' || (isset($content) && $content->date_end == '7') ? 'checked' : '' }}>Tydzien</option>
+                                            <option value=14 {{ old('date_end') == '14' || (isset($content) && $content->date_end == '14') ? 'checked' : '' }}>Dwa tygodnie</option>
+                                            <option value=30 {{ old('date_end') == '30' || (isset($content) && $content->date_end == '30') ? 'checked' : '' }}>Miesiąc</option>
                                         </select>
                                 </div>
 

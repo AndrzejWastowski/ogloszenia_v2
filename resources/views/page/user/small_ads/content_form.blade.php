@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-content form
+
     <div class="page-wrapper">
          <div class="page-content mt-3">
             <div class="row">
@@ -29,11 +29,7 @@ content form
             <div class="col-12 col-lg-9 d-flex">
                 <div class="card p-3">
                     <div class="row justify-content-center">
-
                         <h3><strong>Ogłoszenia Drobne - Dodaj Treść</strong></h3>
-
-
-
                         <div class="bs-stepper">
                             <div class="bs-stepper-header" role="tablist">
                             <!-- your steps here -->
@@ -68,7 +64,7 @@ content form
                         </div>
 
                         <form id="form" name="form" class="row g-3" action="{{ route('page.user.small_ads.content_post') }}"  method="POST" role="form" >
-                            <input type="hidden" name="id" value="{{ $content->id==null ? 0  : $content->id  }}">
+                            <input type="hidden" name="id" value="{{ $content->id===null ? 0  : $content->id  }}">
                             @csrf
                             @if ($errors->any())
                                 <label for="category"><strong>Uwaga - błędy w formularzu</strong></label>
@@ -124,47 +120,46 @@ content form
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_start"><strong>Start ogłoszenia</strong></label>
                                     <input placeholder="Data publikacji" id="date_start" name="date_start" class="form-control" type="text"  value="{{ $content->date_start ?? ''}}" required>
-                                </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_end"><strong>Na ile czasu</strong></label>
                                         <select class="form-select" id="date_end" name="date_end" >
-                                            <option value=7  {{ old('date_end') == '7' ? 'checked' : '' }}>Tydzien</option>
-                                            <option value=14 {{ old('date_end') == '14' ? 'checked' : '' }}>Dwa tygodnie</option>
-                                            <option value=30 {{ old('date_end') == '30' ? 'checked' : '' }}>Miesiąc</option>
+                                            <option value=7  {{ old('date_end') == '7' || (isset($content) && $content->date_end == '7') ? 'checked' : '' }}>Tydzien</option>
+                                            <option value=14 {{ old('date_end') == '14' || (isset($content) && $content->date_end == '14') ? 'checked' : '' }}>Dwa tygodnie</option>
+                                            <option value=30 {{ old('date_end') == '30' || (isset($content) && $content->date_end == '30') ? 'checked' : '' }}>Miesiąc</option>
                                         </select>
                                 </div>
 
                                 <div class="col-md-12 mb-4">
                                     <label class="form-label" for="name"><strong>Nazwa</strong> <small>(min. 10 znaków max. 250)*</small></label>
-                                    <input type="text" id="name" name="name" class="form-control rounded " minlength="10" maxlength="250" placeholder="Nazwa towaru / produktu" value="{{ old('name') }}" required >
+                                    <input type="text" id="name" name="name" class="form-control rounded " minlength="10" maxlength="250" placeholder="Nazwa towaru / produktu" value="{{ old('name') ?? $content->name ?? '' }}" required >
                                 </div>
                                 <div class="col-md-12 mb-4">
                                     <label class="form-label"  for="lead"><strong>Lid - krótki opis wyświetlany przy ogłoszeniu </strong> <small>(min. 30 znaków max. 250)*</small></label>
-                                    <textarea class="form-control rounded-2 p-2" id="lead" name="lead" rows="3"  minlength="30" maxlength="250" placeholder="Opis skrócony (od 10 do 250znaków)" required>{{ old('lead') }}</textarea>
+                                    <textarea class="form-control rounded-2 p-2" id="lead" name="lead" rows="3"  minlength="30" maxlength="250" placeholder="Opis skrócony (od 10 do 250znaków)" required>{{ old('lead') ?? $content->lead ?? '' }}</textarea>
                                 </div>
                                 <div class="col-md-12 mb-4">
                                     <label class="form-label"  for="description"><strong>Treść - pełny opis wyświetlany w  rozwinięciu ogłoszenia</strong> <small>(min. 35 znaków max. 2500)* </small></label>
-                                    <textarea class="form-control rounded-2 p-2" id="description" name="description" rows="10" minlength="30" maxlength="2500"  placeholder="Treść ogłoszenia (od 30 do 3000 znaków)" required>{{ old('description') }}</textarea>
+                                    <textarea class="form-control rounded-2 p-2" id="description" name="description" rows="10" minlength="30" maxlength="2500"  placeholder="Treść ogłoszenia (od 30 do 3000 znaków)" required>{{ old('description') ?? $content->description ?? '' }} </textarea>
                                 </div>
 
                                 <div class="col-md-3 mb-4">
                                     <label class="form-label" for="price"><strong>Cena</strong></label>
-                                    <input type="text" id="price" name="price" class="form-control" placeholder="Cena" value="{{ old('price') }}" required>
+                                    <input type="text" id="price" name="price" class="form-control" placeholder="Cena" value="{{ old('price') ?? $content->price ?? '' }}" required>
                                 </div>
 
                                 <div class="col-md-3 mb-4">
                                     <label class="form-label" for="items"><strong>Ile sztuk</strong></label>
-                                    <input type="text" id="items" name="items" class="form-control" placeholder="sztuk" value="{{ old('items') }}" required>
+                                    <input type="text" id="items" name="items" class="form-control" placeholder="sztuk" value="{{ old('items') ?? $content->items ?? '' }}" required>
                                 </div>
                                  <div class="col-md-6 mb-4">
                                     <label for="invoices"><strong>Rodzaj wystawianego rachunku</strong></label>
                                     <select class="form-select mt-2" id="invoices" name="invoice" required>
-                                        <option value="0" diabled {{ old('invoice') == '0' ? 'checked' : '' }}>Wybierz rodzaj rachunku</option>
-                                        <option value="Nie wystawiam faktury" {{ old('invoice') == 'Nie wystawiam faktury' ? 'checked' : '' }} >Nie wystawiam faktury</option>
-                                        <option value="Faktura VAT" {{ old('invoice') == 'Faktura VAT' ? 'checked' : '' }}>Faktura z VAT</option>
-                                        <option value="Faktura Vat-marża" {{ old('invoice') == 'Faktura Vat-marża' ? 'checked' : '' }} >Faktura Vat-marża</option>
-                                        <option value="Faktura bez VAT" {{ old('invoice') == 'Faktura bez VAT' ? 'checked' : '' }}>Faktura bez VAT</option>
+                                        <option value="0" {{ old('invoice') == '0' || (isset($content) && $content->invoice == '0') ? 'selected' : '' }}>Wybierz rodzaj rachunku</option>
+                                        <option value="Nie wystawiam faktury" {{ old('invoice') == 'Nie wystawiam faktury' || (isset($content) && $content->invoice == 'Nie wystawiam faktury') ? 'selected' : '' }}>Nie wystawiam faktury</option>
+                                        <option value="Faktura VAT" {{ old('invoice') == 'Faktura VAT' || (isset($content) && $content->invoice == 'Faktura VAT') ? 'selected' : '' }}>Faktura z VAT</option>
+                                        <option value="Faktura Vat-marża" {{ old('invoice') == 'Faktura Vat-marża' || (isset($content) && $content->invoice == 'Faktura Vat-marża') ? 'selected' : '' }}>Faktura Vat-marża</option>
+                                        <option value="Faktura bez VAT" {{ old('invoice') == 'Faktura bez VAT' || (isset($content) && $content->invoice == 'Faktura bez VAT') ? 'selected' : '' }}>Faktura bez VAT</option>
                                     </select>
                                 </div>
 
@@ -172,22 +167,22 @@ content form
                                     <label class=""><strong>Rodzaj oferty</strong></label>
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <input type="radio" class="form-check-input" id="conditionNew" name="condition" value="nowe" {{ old('condition') == 'nowe' ? 'checked' : '' }}>
+                                    <input type="radio" class="form-check-input" id="conditionNew" name="condition" value="nowe" {{ old('condition') == '0' || (isset($content) && $content->condition == 'nowe') ? 'checked' : '' }} >
                                     <label class="form-check-label" for="conditionNew" >Produkt nowy</label>
                                 </div>
                                 <div class="col-md-4 mb-4">
-                                    <input type="radio" class="form-check-input" id="conditionUsed" name="condition" value="używane"  {{ old('condition') == 'używane' ? 'checked' : '' }}>
+                                    <input type="radio" class="form-check-input" id="conditionUsed" name="condition" value="używane" {{ old('condition') == '0' || (isset($content) && $content->condition == 'używane') ? 'checked' : '' }} >
                                     <label class="form-check-label" for="conditionUsed">Produkt używany</label>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="contact_phone" value=""><strong>Telefon kontaktowy</strong></label>
-                                    <input name="contact_phone" class="form-control"  id="contact_phone"  value="{{ old('contact_phone') }}">
+                                    <input name="contact_phone" class="form-control"  id="contact_phone"  value="{{ old('contact_phone') ?? $content->contact_phone ?? '' }} ">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="contact_email" ><strong>Adres e-mail</strong></label><br>
-                                    <input name="contact_email" class="form-control"  id="contact_email" value="{{ old('contact_email') }}">
+                                    <input name="contact_email" class="form-control"  id="contact_email" value="{{ old('contact_email') ?? $content->contact_email ?? '' }} ">
                                 </div>
                                 <div class="mb-3">
                                     <div class="text-end">
@@ -202,4 +197,4 @@ content form
                 </div>
             </div>
         @endsection
-        @section('script')        @vite(['resources/js/small_ads_script.js']) // Indywidualny skrypt dla tej podstrony @endsection
+        @section('script')   @vite(['resources/js/small_ads_script.js']) @endsection
