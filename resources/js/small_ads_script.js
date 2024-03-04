@@ -48,6 +48,9 @@ $(function () {
 
 
 
+    $('#image-uploadify').imageuploadify();
+
+
 
     $('#price').on("change", function (e) {
 
@@ -82,3 +85,4 @@ $(function () {
 
     });
 });
+

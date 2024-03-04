@@ -120,7 +120,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_start"><strong>Start ogłoszenia</strong></label>
                                     <input placeholder="Data publikacji" id="date_start" name="date_start" class="form-control" type="text"  value="{{ $content->date_start ?? ''}}" required>
-
+                                </div>
                                 <div class="col-md-6">
                                     <label class="form-label"  for="date_end"><strong>Na ile czasu</strong></label>
                                         <select class="form-select" id="date_end" name="date_end" >

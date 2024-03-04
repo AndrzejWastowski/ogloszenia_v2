@@ -50,6 +50,8 @@ Route::get('user/ogloszenie_drobne/content_form', [SmallAdsController::class, 'c
 Route::post('user/ogloszenie_drobne/content_post', [SmallAdsController::class, 'content_post'])->name('page.user.small_ads.content_post');
 Route::get('user/ogloszenie_drobne/photo_form', [SmallAdsController::class, 'photo_form'])->name('page.user.small_ads.photo_form');
 Route::post('user/ogloszenie_drobne/photo_send', [SmallAdsController::class, 'photo_send'])->name('page.user.small_ads.photo_send');
+Route::get('user/ogloszenie_drobne/photo_send',[SmallAdsController::class, 'photo_sendGet'])->name('page.user.small_ads.photo_sendGet');
+Route::post('user/ogloszenie_drobne/photo_delete', [SmallAdsController::class, 'photo_send'])->name('page.user.small_ads.photo_delete');
 
 
 //przyklad trasy sprwdzajacej uprawnienia uzytkownika

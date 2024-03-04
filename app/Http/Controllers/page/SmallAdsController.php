@@ -9,11 +9,13 @@ use App\Models\SmallAdsSubCategorie;
 use App\Models\SmallAdsContent;
 use App\Validators\Validator;
 use App\Models\SmallAdsPhoto;
-
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\SmallAdsRequest;
-
+use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 use App\Services\ImageService;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 use Illuminate\Http\Request;
 
@@ -203,21 +205,20 @@ public function modyfikuj()
 
     public function content_form()
     {
-      
         $user = Auth::user();
         $content = SmallAdsContent::where('users_id', $user->id) // Filtruj po 'users_id'
         ->where('status', 'unfinished') // Filtruj po 'active' = false
         ->first(); // Pobierz pierwszy rekord z wyników
-    if ($content === null)
-    {
-        $content = new SmallAdsContent();
-    }
+        if ($content === null)
+        {
+            $content = new SmallAdsContent();
+        }
        // $content->date_start = now();
 
         $data_start = Carbon::parse($content->date_start);
         $data_end = Carbon::parse($content->date_end);
         $roznica_dni = $data_start->diffInDays($data_end);
-   
+
         $content->date_start = Carbon::parse(now())->format('Y-m-d H:i');
 
         $content->date_end = $roznica_dni;
@@ -229,13 +230,12 @@ public function modyfikuj()
         $sidebar_element = 'small_ads_add';
         return view('page.user.small_ads.content_form',compact('content','user','sidebar','categories','sidebar_element'));
     }
+
     public function content_post(SmallAdsRequest $request) {
 
-       
         $validated = $request->validated();
         $validated['users_id'] = Auth::id();
 
-    
         if ($validated['id']==0)
         {
            // Zapis danych do bazy danych
@@ -250,8 +250,6 @@ public function modyfikuj()
             $rekord->update($validated);
          }
 
-
-
         return redirect()->route('page.user.small_ads.photo_form'); // Przekierowanie na stronę sukcesu.
     }
 
@@ -259,7 +257,92 @@ public function modyfikuj()
         $user = Auth::user();
         $sidebar = 'twoje_ogloszenia';
         $sidebar_element = 'small_ads_add';
-        return view('page.user.small_ads.photo_form',compact('user','sidebar',));
+        $content = SmallAdsContent::with('photos')->where('users_id', $user->id)->where('status', 'unfinished')->first(); // Filtruj po 'active' = false
+        $path = $this->imageService->createImagePath('drobne',$content->created_at);
+
+        return view('page.user.small_ads.photo_form',compact('user','sidebar','content','path'));
     }
+
+    public function photo_send(Request $request)
+    {
+
+        $this->validate($request, [
+            'file.*' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+        ]);
+        $pom =0;
+        $user = Auth::user();
+        $content = SmallAdsContent::where('users_id', $user->id) // Filtruj po 'users_id'
+        ->where('status', 'unfinished') // Filtruj po 'active' = false
+        ->first(); // Pobierz pierwszy rekord z wyników
+        if ($content === null)
+            {
+                    return response()->json(['error' => 'Nie udało się przesłać plików - błąd pobierania właściwego ogłoszenia.'], 500);
+            }
+            $date = $content->created_at;
+        if ($request->hasFile('file')) {
+            foreach($request->file('file') as $image)
+            {
+                $pom++;
+                $uniqueId = substr(md5(time().rand()), 0, 8);
+                // Tworzenie unikalnej nazwy dla każdego obrazu
+                // Miejsce docelowe
+                $destinationPath = $this->imageService->createImagePath('drobne',$content->created_at);
+
+                // Sprawdź, czy folder docelowy istnieje, a jeśli nie, utwórz go
+
+
+                if (!File::exists($destinationPath)) {
+                    File::makeDirectory($destinationPath, 0755, true, true);
+                }
+
+                // Przetwarzanie i zapisywanie obrazu (tak jak wcześniej)
+
+                $manager = new ImageManager(new Driver());
+                $new_image = $manager->read($image->path());;
+
+                $img = $new_image->scale(1920,1920)->toWebp(60)->save($destinationPath.'/'.$uniqueId. 'd.webp');
+
+                $img = $manager->read($image->path());
+                $image_encoded = $img->scale(350,350)->toWebp(60)->save($destinationPath.'/'.$uniqueId. 'm.webp');
+
+                $img = $manager->read($image->path());
+                $image_cover = $img->cover(350, 350)->toWebp(60)->save($destinationPath.'/'.$uniqueId. 'kw.webp');
+
+                // Zapisywanie ścieżki do bazy danych
+                $photo = new SmallAdsPhoto();
+                $photo->small_ads_contents_id = $content->id;
+                $photo->name = $uniqueId;
+                $photo->sort = $pom;
+               // $photo->top = 0;
+                //$photo->description = "";
+                //$photo->user_id = Auth::id(); // Dodaj tu usera
+                $photo->save();
+            }
+
+            return response()->json(['success' => 'Pliki zostały pomyślnie przesłane.']);
+        }
+       // return response()->json(['error' => 'Nie udało się przesłać plików.'], 500);
+    }
+
+    public function photo_sendGet(Request $request)
+    {
+        return redirect()->route('page.user.small_ads.photo_form'); // Przekierowanie na stronę sukcesu.
+    }
+
+
+public function photo_delete(Request $request)
+{
+    $fileName = $request->fileName;
+    $filePath = storage_path('drobne/' . $fileName);
+
+    if (File::exists($filePath)) {
+        File::delete($filePath);
+        // Tutaj możesz również aktualizować bazę danych, jeśli to konieczne
+
+        return response()->json(['success' => 'Plik usunięty.']);
+    }
+
+    return response()->json(['error' => 'Plik nie istnieje.'], 404);
+}
 
 }

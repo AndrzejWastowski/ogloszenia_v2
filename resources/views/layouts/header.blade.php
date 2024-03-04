@@ -128,8 +128,7 @@
                                     <a class="dropdown-item" href="javascript:;">
                                         <div class="d-flex align-items-center">
                                             <div class="user-online">
-                                                <img src="assets/images/avatars/avatar-1.png" class="msg-avatar"
-                                                    alt="user avatar">
+                                                <img src="assets/images/avatars/avatar-1.png" class="msg-avatar" alt="user avatar">
                                             </div>
                                             <div class="flex-grow-1">
                                                 <h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
