@@ -33,17 +33,14 @@ Route::get('/drobne/getSubcategory/{categoryID}', [SmallAdsController::class, 'g
 Route::get('/drobne/{SmallAdsCategorie}', [SmallAdsController::class, 'category'])->name('page.small_ads.category');
 Route::get('/drobne/{SmallAdsCategorie}/{SmallAdsSubCategorie}', [SmallAdsController::class, 'subCategory'])->name('page.small_ads.subCategory');
 
-
 Route::get('/nieruchomosci', [EstatesController::class, 'all'])->name('page.estates.all');
 
 Route::get('/uzytkownicy/tablica/{UserID}', [UserDashboardController::class, 'userDashboard'])->name('page.dashboard.user');
-
 
 Route::get('login/{provider}', [SocialiteLoginController::class, 'redirectToProvider'])->name('redirectToProvider');
 Route::get('login/{provider}/callback', [SocialiteLoginController::class, 'handleProviderCallback']);
 Route::get('login/facebook/callback', [SocialiteLoginController::class, 'handleFacebookCallback']);
 Route::get('login/google/callback', [SocialiteLoginController::class, 'handleGoogleCallback']);
-
 
 Route::get('user/twoje_ogloszenia', [UserDashboardController::class, 'your_ads'])->name('page.user.your_ads');
 Route::get('user/ogloszenie_drobne/content_form', [SmallAdsController::class, 'content_form'])->name('page.user.small_ads.content_form');
@@ -52,7 +49,9 @@ Route::get('user/ogloszenie_drobne/photo_form', [SmallAdsController::class, 'pho
 Route::post('user/ogloszenie_drobne/photo_send', [SmallAdsController::class, 'photo_send'])->name('page.user.small_ads.photo_send');
 Route::get('user/ogloszenie_drobne/photo_send',[SmallAdsController::class, 'photo_sendGet'])->name('page.user.small_ads.photo_sendGet');
 Route::post('user/ogloszenie_drobne/photo_delete', [SmallAdsController::class, 'photo_send'])->name('page.user.small_ads.photo_delete');
-
+Route::get('user/ogloszenie_drobne/promotion_form', [SmallAdsController::class, 'promotion_form'])->name('page.user.small_ads.promotion_form');
+Route::post('user/ogloszenie_drobne/promotion_send', [SmallAdsController::class, 'promotion_send'])->name('page.user.small_ads.promotion_send');
+Route::post('user/ogloszenie_drobne/payment_form', [SmallAdsController::class, 'payment_form'])->name('page.user.small_ads.payment_form');
 
 //przyklad trasy sprwdzajacej uprawnienia uzytkownika
 Route::get('/admin', 'AdminController@index')->middleware('auth', 'checkPermission:admin');

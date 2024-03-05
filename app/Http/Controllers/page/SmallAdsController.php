@@ -9,6 +9,8 @@ use App\Models\SmallAdsSubCategorie;
 use App\Models\SmallAdsContent;
 use App\Validators\Validator;
 use App\Models\SmallAdsPhoto;
+use App\Models\OrderList;
+use App\Models\Price;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\SmallAdsRequest;
 use Intervention\Image\Facades\Image;
@@ -330,19 +332,45 @@ public function modyfikuj()
     }
 
 
-public function photo_delete(Request $request)
-{
-    $fileName = $request->fileName;
-    $filePath = storage_path('drobne/' . $fileName);
+    public function photo_delete(Request $request)
+    {
+        $fileName = $request->fileName;
+        $filePath = storage_path('drobne/' . $fileName);
 
-    if (File::exists($filePath)) {
-        File::delete($filePath);
-        // Tutaj możesz również aktualizować bazę danych, jeśli to konieczne
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            // Tutaj możesz również aktualizować bazę danych, jeśli to konieczne
 
-        return response()->json(['success' => 'Plik usunięty.']);
+            return response()->json(['success' => 'Plik usunięty.']);
+        }
+
+        return response()->json(['error' => 'Plik nie istnieje.'], 404);
     }
+    public function promotion_form(Request $request)
+    {
 
-    return response()->json(['error' => 'Plik nie istnieje.'], 404);
-}
+        $collection = Price::where('section', 'small_ads')->get();
+       // dd($collection);
+        foreach ($collection as $row)
+        {
+
+            $price[$row->name]['id'] = $row->id;
+            $price[$row->name]['name'] = $row->name;
+            $price[$row->name]['description'] = $row->description;
+            $price[$row->name]['price'] = $row->price;
+            
+            
+
+        }
+
+        
+        $user = Auth::user();
+        $sidebar = 'twoje_ogloszenia';
+        $sidebar_element = 'small_ads_add';
+        $content = SmallAdsContent::with('photos')->where('users_id', $user->id)->where('status', 'unfinished')->first(); // Filtruj po 'active' = false
+        $path = $this->imageService->createImagePath('drobne',$content->created_at);
+
+        return view('page.user.small_ads.promotion_form',compact('user','sidebar','content','path','price'));
+    }
 
 }
