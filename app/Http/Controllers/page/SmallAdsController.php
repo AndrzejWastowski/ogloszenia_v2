@@ -11,8 +11,13 @@ use App\Validators\Validator;
 use App\Models\SmallAdsPhoto;
 use App\Models\OrderList;
 use App\Models\Price;
+
+use App\Enums\Inscription;
+use App\Enums\Highlighted;
+
 use Illuminate\Support\Facades\File;
-use App\Http\Requests\SmallAdsRequest;
+use App\Http\Requests\SmallAds\ContentRequest;
+use App\Http\Requests\SmallAds\PromotionRequest;
 use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 use App\Services\ImageService;
@@ -233,7 +238,7 @@ public function modyfikuj()
         return view('page.user.small_ads.content_form',compact('content','user','sidebar','categories','sidebar_element'));
     }
 
-    public function content_post(SmallAdsRequest $request) {
+    public function content_post(ContentRequest $request) {
 
         $validated = $request->validated();
         $validated['users_id'] = Auth::id();
@@ -274,7 +279,7 @@ public function modyfikuj()
         $pom =0;
         $user = Auth::user();
         $content = SmallAdsContent::where('users_id', $user->id) // Filtruj po 'users_id'
-        ->where('status', 'unfinished') // Filtruj po 'active' = false
+        ->where('status', 'unfinished') // // Filtruj po 'status' = unfinished
         ->first(); // Pobierz pierwszy rekord z wyników
         if ($content === null)
             {
@@ -346,31 +351,55 @@ public function modyfikuj()
 
         return response()->json(['error' => 'Plik nie istnieje.'], 404);
     }
-    public function promotion_form(Request $request)
+    public function promotion_form()
     {
 
         $collection = Price::where('section', 'small_ads')->get();
        // dd($collection);
         foreach ($collection as $row)
         {
-
             $price[$row->name]['id'] = $row->id;
             $price[$row->name]['name'] = $row->name;
             $price[$row->name]['description'] = $row->description;
             $price[$row->name]['price'] = $row->price;
-            
-            
-
         }
+        $inscriptions = Inscription::cases();
+        $highlighteds = Highlighted::cases();
 
-        
         $user = Auth::user();
         $sidebar = 'twoje_ogloszenia';
         $sidebar_element = 'small_ads_add';
         $content = SmallAdsContent::with('photos')->where('users_id', $user->id)->where('status', 'unfinished')->first(); // Filtruj po 'active' = false
         $path = $this->imageService->createImagePath('drobne',$content->created_at);
 
-        return view('page.user.small_ads.promotion_form',compact('user','sidebar','content','path','price'));
+        return view('page.user.small_ads.promotion_form',compact('user','sidebar','content','path','price','inscriptions','highlighteds'));
+    }
+
+    public function promotion_send (PromotionRequest $request)
+    {
+
+        
+        $validated = $request->validated();
+
+        $user = Auth::user();
+        $content = SmallAdsContent::where('users_id', $user->id) // Filtruj po 'users_id'
+        ->where('status', 'unfinished')->first(); // Filtruj po 'status' = unfinished
+
+        //dodatkowe sprawdzanie czy użytkownik czegoś nie kombinuje
+
+        if ($validated['id']==0)
+        {
+           // Zapis danych do bazy danych
+           SmallAdsContent::create($validated); // Wypełnij model validowanymi danymi z requestu
+        }
+         else
+         {
+            // Znajdź istniejący rekord w bazie danych
+            $rekord = SmallAdsContent::find($validated['id']);
+
+            // Aktualizuj dane
+            $rekord->update($validated);
+         }
     }
 
 }

@@ -63,10 +63,13 @@
                 <div class="row  mt-3">
                     <form action="{{ route('page.user.small_ads.promotion_send') }}"  method="POST" enctype="multipart/form-data" role="form" name="formPromotion">
                         @csrf
+                        <input type="hidden" id='id' name='id' value="{{ $content->id }}" >
+                        <input type="hidden" id='date_start' name='date_start' value="{{ $content->date_start }}" >
+
                         <h4><strong>Czas trwania promocji</strong></h4>
                         <div class="row">
                             <div class="col-3">
-                                <select class="browser-default custom-select mb-4" id="date_end_promotion" name="date_end_promotion" >
+                                <select class="browser-default custom-select mb-4" id="date_end" name="date_end" >
                                     <option value="7" selected="">Tydzien</option>
                                     <option value="14">Dwa tygodnie</option>
                                     <option value="30">Miesiąc</option>
@@ -81,13 +84,13 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <h4><strong>Wyświetlaj się nad zwykłymi ogłoszeniami</strong></h4>
+                            <h4><strong>Wyświetlaj przed zwykłymi ogłoszeniami</strong></h4>
                         </div>
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="promotion" id="promotion" value="true">
-                                    <label class="form-check-label" for="promotion">w ogłoszeniach promowanych</label>
+                                    <input type="checkbox" class="form-check-input" name="promoted" id="promoted" value="true">
+                                    <label class="form-check-label" for="promoted">w ogłoszeniach promowanych</label>
                                 </div>
                             </div>
                             <div class="col-9">
@@ -106,35 +109,17 @@
                             <div class="col-3 p-0">
                                 <div class="form-check">
                                 <!-- Group of default radios - option 1 -->
-                                        <div class="custom-control custom-radio mb-1 mt-1 p-1">
-                                            <input type="radio" class="custom-control-input" id="highlighted_0" value="#ffffff" name="highlighted"  checked>
-                                            <label class="custom-control-label" for="highlighted_0" >Bez koloru</label>
-                                        </div>
-                                        <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: #c8cdff" >
-                                            <input type="radio" class="custom-control-input" id="highlighted_1" value="#c8cdff" name="highlighted"  >
-                                            <label class="custom-control-label" for="highlighted_1">Kolor niebieski</label>
-                                        </div>
+                                @foreach($highlighteds as $highlighted)
+                                    
+                                    <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: {{ $highlighted->value }}">
+                                        <input type="radio" class="custom-control-input"  id="highlighted_{{ $loop->iteration }}" value="{{ $highlighted->value }}" name="highlighted"  {{ $loop->first ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="highlighted_0" >Kolor {{ $highlighted->name }}</label>
+                                    </div>
+    
+                                @endforeach
 
-                                        <!-- Group of default radios - option 2 -->
-                                        <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: #ffc8dd">
-                                            <input type="radio" class="custom-control-input" id="highlighted_2" value="#ffc8dd" name="highlighted" >
-                                            <label class="custom-control-label" for="highlighted_2">Kolor czerwony</label>
-                                        </div>
-
-                                        <!-- Group of default radios - option 3 -->
-                                        <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: #c8ffdf">
-                                            <input type="radio" class="custom-control-input" id="highlighted_3" value="#c8ffdf" name="highlighted" >
-                                            <label class="custom-control-label" for="highlighted_3">Kolor zielony</label>
-                                        </div>
-                                        <!-- Group of default radios - option 3 -->
-                                        <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: #eac8ff">
-                                                <input type="radio" class="custom-control-input" id="highlighted_4" value="#eac8ff" name="highlighted" >
-                                                <label class="custom-control-label" for="highlighted_4">Kolor fioletowy</label>
-                                            </div>
-                                            <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: #fff7c8">
-                                                <input type="radio" class="custom-control-input" id="highlighted_5" value="#fff7c8" name="highlighted" >
-                                                <label class="custom-control-label" for="highlighted_5">Kolor żółty</label>
-                                            </div>
+                               
+                                    
                                 </div>
                             </div>
                             <div class="col-9">
@@ -150,10 +135,9 @@
                         <div class="row mb-3">
                             <div class="col-3">
                                 <select class="browser-default custom-select mb-4" name="inscription" id="inscription" >
-                                    <option value="none" selected="selected">Bez rekomendacji</option>
-                                    <option value="Promocja!">Promocja</option>
-                                    <option value="Bestseller">Bestseller</option>
-                                    <option value="Wyprzedaż">wyprzedaż</option>
+                                    @foreach($inscriptions as $inscription)
+                                        <option value="{{  $inscription->value }}">{{ $inscription->value }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-9">

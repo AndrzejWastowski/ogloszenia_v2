@@ -87,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function calculateSum() {
         let sum = 0;
         const prices = window.price;
-        // Pobierz wartość z selecta 'date_end_promotion' i przelicz cenę
-        const promotionDuration = document.getElementById('date_end_promotion').value;
-        if (document.getElementById('promotion').checked) {
+        // Pobierz wartość z selecta 'date_end' i przelicz cenę
+        const promotionDuration = document.getElementById('date_end').value;
+        if (document.getElementById('promoted').checked) {
             const promotionPrice = prices['promoted_' + promotionDuration].price / 100;
             sum += promotionPrice;
         }
@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Dodaj event listener do elementów formularza
-    document.getElementById('date_end_promotion').addEventListener('change', calculateSum);
-    document.getElementById('promotion').addEventListener('change', calculateSum);
+    document.getElementById('date_end').addEventListener('change', calculateSum);
+    document.getElementById('promoted').addEventListener('change', calculateSum);
     document.getElementById('inscription').addEventListener('change', calculateSum);
     document.querySelectorAll('input[type=radio][name="highlighted"]').forEach(radio => {
         radio.addEventListener('change', calculateSum);
