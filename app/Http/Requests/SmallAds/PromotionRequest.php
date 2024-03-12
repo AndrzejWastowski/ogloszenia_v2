@@ -105,12 +105,8 @@ class PromotionRequest extends FormRequest
             $date_start = Carbon::createFromFormat('Y-m-d H:i:s', $data['date_start']);
             $date_end = $date_start->copy()->addDays($data['date_end']);
             $date_end = $date_end->format('Y-m-d H:i:s');
-            $data['id'] = (int) $data['id'];           
+            $data['id'] = (int) $data['id'];
          //   $data['items'] = (int) $data['items'];
-            
-
-
-
             // Dodaj datę końcową do danych walidacji
             $validator->setData(array_merge($data, ['date_end' => $date_end]));
 

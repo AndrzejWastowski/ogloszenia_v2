@@ -1,0 +1,6 @@
+
+$(function () {
+
+$('#image-uploadify').imageuploadify();
+
+});

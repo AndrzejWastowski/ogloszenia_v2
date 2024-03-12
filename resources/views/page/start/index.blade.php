@@ -211,7 +211,11 @@
 
     <!--end wrapper-->
 @endsection
+@push('scripts')
 
+@vite(['resources/js/start/carousel.js'])
+
+@endpush
 
 @section('script')
 

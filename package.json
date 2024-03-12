@@ -16,6 +16,8 @@
     "dependencies": {
         "carousel": "^0.0.3",
         "jquery": "^3.7.1",
-        "perfect-scrollbar": "^1.5.5"
+        "jquery-datetimepicker": "^2.5.21",
+        "perfect-scrollbar": "^1.5.5",
+        "slick-carousel": "^1.8.1"
     }
 }

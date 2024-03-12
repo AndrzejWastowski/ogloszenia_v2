@@ -110,16 +110,13 @@
                                 <div class="form-check">
                                 <!-- Group of default radios - option 1 -->
                                 @foreach($highlighteds as $highlighted)
-                                    
+
                                     <div class="custom-control custom-radio mb-1 mt-1 p-1" style="background-color: {{ $highlighted->value }}">
                                         <input type="radio" class="custom-control-input"  id="highlighted_{{ $loop->iteration }}" value="{{ $highlighted->value }}" name="highlighted"  {{ $loop->first ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="highlighted_0" >Kolor {{ $highlighted->name }}</label>
                                     </div>
-    
                                 @endforeach
 
-                               
-                                    
                                 </div>
                             </div>
                             <div class="col-9">
@@ -168,6 +165,5 @@
 <script>
   window.price = @json($price);
 </script>
-  @vite(['resources/js/small_ads_script.js'])
-
+  @vite(['resources/js/small_ads/promotion_form.js'])
 @endsection

@@ -244,5 +244,6 @@
     </div>
 @endsection
 @section('script')
-    @vite(['resources/js/small_ads_script.js'])
+
+  @vite(['resources/js/small_ads/content_form.js'])
 @endsection
