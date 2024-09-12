@@ -9,7 +9,7 @@ final class PaymentsAdValidator extends Validator
         return [
             'id' => 'required|integer|min:1',
             'section'=> 'required|integer|min:1|max:30',
-            'price' => 'required|float|min:0'            
+            'price' => 'required|float|min:0'
         ];
     }
 
@@ -19,7 +19,7 @@ final class PaymentsAdValidator extends Validator
             'id' => 'błędny identyfikator ogłoszenia<br>',
             'section'=> 'nie ma takiej sekcji ogłoszeń<br>',
             'price' => 'niepoprawna wartość / cena<br>'
-            
+
         ];
     }
 }

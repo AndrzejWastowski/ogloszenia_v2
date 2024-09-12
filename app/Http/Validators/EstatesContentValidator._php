@@ -2,22 +2,25 @@
 declare(strict_types=1);
 namespace App\Http\Validators;
 
-final class CreateOrUpdatePaymentValidator extends Validator
+final class EstatesContentValidator extends Validator
 {
     protected function rules(): array
     {
         return [
-            'id' => '',
+            'id' => ['required', 'integer', 'min:0'],
             'name' => 'required|min:10|max:255',
             'lead' => 'required|min:30|max:255',
             'description' => 'required|min:30|max:2500',
-            'adsCategoriesId' => 'required|integer|min:1',
-            'adsSubCategoriesId' => 'required|integer|min:1',
-            'dateStart' => 'required|date|date_format:Y-m-d|after:yesterday',
-            'dateEnd' => 'required|integer|min:1|digits_between: 1,30',
-            'price' => 'required|numeric',
+            'estates_categories_id' => 'required|integer|min:1',
+            'date_start' => 'required|date|date_format:Y-m-d|after:yesterday',
+            'date_end' => 'required|integer|min:1|digits_between: 1,30',
+            'price' => 'required|numeric|min:0|max:99999999',
+            'area' => 'required|numeric|min:0|max:99999999',
+            'unit' => 'required|in:mkw,ar,hektar',
+            'market' => 'required|in:pierwotny,wtórny',
+            'estates_type'=> 'required|in:Sprzedam,Wynajmę,Zamienię',
             'invoice' => 'required|in:Nie wystawiam faktury,Faktura VAT,Faktura Vat-marża,Faktura bez VAT',
-            'adsClassifiedEnum' => 'required|in:sprzedam,kupię,oddam,zamienie'
+            'small_ads_classified_enum' => 'required|in:sprzedam,kupię,zamienię,oddam,wypożyczę'
         ];
     }
 
@@ -33,12 +36,12 @@ final class CreateOrUpdatePaymentValidator extends Validator
             'description.required' => 'pole <b>opis</b> jest wymagane!<br>',
             'description.min' => 'pole <b>opis</b> musi zawierać wiecej niż 30 znaków (i mniej niż 2500!)<br>',
             'description.max' => 'pole <b>opis</b> musi zawierać mniej niż 2500 znaków (i więcej niż 30!)<br>',
-            'dateStart.required' => 'Pole <b>data start</b> jest niepoprawne<br>',
-            'dateStart.date_format' => 'niepoprawny format <b>data start</b>',
-            'dateStart.after' => 'Pole  <b>data startowa</b> ogłoszenia nie może być z datą wsteczną!',
-            'dateEnd.required' => 'Pole <b>data end</b> musi być późniejsza niż data start',
-            'adsSubCategoriesId:required' => 'nie wybrałeś podkategorii',
-            'adsSubCategoriesId:min:1' => 'nie wybrałeś podkategorii',
+            'date_start.required' => 'Pole <b>data start</b> jest niepoprawne<br>',
+            'date_start.date_format' => 'niepoprawny format <b>data start</b>',
+            'date_start.after' => 'Pole  <b>data startowa</b> ogłoszenia nie może być z datą wsteczną!',
+            'date_end.required' => 'Pole <b>data end</b> musi być późniejsza niż data start',
+            'small_ads_categories_id:required' => 'nie wybrałeś podkategorii',
+            'small_ads_categories_id:min:1' => 'nie wybrałeś podkategorii',
             'invoice:required' => 'pole z rodzajem rachunku jest wymagane',
             'price:required' => 'pole <b>cena</b> jest wymagane',
             'price:max' => 'Chyba troche przesadziłeś z <b>ceną</b> ',

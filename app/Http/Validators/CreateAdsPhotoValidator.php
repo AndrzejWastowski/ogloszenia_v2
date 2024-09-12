@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace App\Http\Validators;
+namespace app\Http\Validators;
 
 final class CreateAdsPhotoValidator extends Validator
 {

@@ -10,7 +10,7 @@ final class UpdateAdPromotionValidator extends Validator
             'id.*' => 'required|integer|min:1',
             'dateEnd'=> 'required|integer|min:1|max:30',
             'recomended' => 'in:none,Promocja!,Bestseller,Wyprzedaż',
-            'highlighted' => 'required|in:#ffffff,#c8cdff,#ffc8dd,#c8ffdf,#eac8ff,#fff7c8'            
+            'highlighted' => 'required|in:#ffffff,#c8cdff,#ffc8dd,#c8ffdf,#eac8ff,#fff7c8'
         ];
     }
 
